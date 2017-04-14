@@ -522,7 +522,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletTaken();
+				environment.ManToiletTaken("IB404");
 			}
 		});
 		
@@ -530,7 +530,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletFree();
+				environment.ManToiletFree("IB404");
 			}
 		});
 		
@@ -538,7 +538,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalTaken();
+				environment.ManUrinalTaken("IE-210");
 			}
 		});
 		
@@ -546,7 +546,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalFree();
+				environment.ManUrinalFree("IE-210");
 			}
 		});
 	}
