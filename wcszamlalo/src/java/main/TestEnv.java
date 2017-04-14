@@ -1,12 +1,12 @@
 package main;
 
-import jason.asSyntax.*;
-import jason.environment.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Logger;
+
+import jason.asSyntax.Literal;
+import jason.asSyntax.Structure;
+import main.rooms.ManToilet;
 
 public class TestEnv extends jason.environment.Environment {
 
@@ -18,23 +18,34 @@ public class TestEnv extends jason.environment.Environment {
 	/** Called before the MAS execution with the args informed in .mas2j */
 	@Override
 	public void init(String[] args) {
-//		addPercept("mantoiletsensor1", Literal.parseLiteral("available(2,3)"));
-		addPercept("mantoiletsensor2", Literal.parseLiteral("available(2,3)"));
-		addPercept("mantoiletsensor3", Literal.parseLiteral("available(2,3)"));
-		addPercept("mantoiletsensor4", Literal.parseLiteral("available(2,3)"));
-		addPercept("mantoiletsensor5", Literal.parseLiteral("available(2,3)"));
-		addPercept("mantoiletsensor1",
-				Literal.parseLiteral("position(\"I E 010\")"));
-		addPercept("mantoiletsensor2",
-				Literal.parseLiteral("position(\"I E 110\")"));
-		addPercept("mantoiletsensor3",
-				Literal.parseLiteral("position(\"I E 210\")"));
-		addPercept("mantoiletsensor4",
-				Literal.parseLiteral("position(\"I E 310\")"));
-		addPercept("mantoiletsensor5",
-				Literal.parseLiteral("position(\"I E 410\")"));
-
 		WorldModel wm = new WorldModel();
+		
+		int count = 0;
+
+		List<ManToilet> manToilets = wm.getManToiletListE();
+		
+		for (int i = 0; i < manToilets.size(); ++i) {
+			ManToilet mt = manToilets.get(i);
+			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
+			count++;
+		}
+		
+		manToilets = wm.getManToiletListL();
+		
+		for (int i = 0; i < manToilets.size(); ++i) {
+			ManToilet mt = manToilets.get(i);
+			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
+			count++;
+		}
+		
+		manToilets = wm.getManToiletListB();
+		
+		for (int i = 0; i < manToilets.size(); ++i) {
+			ManToilet mt = manToilets.get(i);
+			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
+			count++;
+		}
+		
 		view = new View(wm, "WCCounter", 350);
 		view.setEnv(this);
 	}
