@@ -6,4 +6,4 @@
 
 /* Plans */
 
-+takenWc: true <- ?available(N,M); UjN=N-1; -+available(UjN,M);?available(I,J);.print("Maradt:",I,",",J).
++takenWc: available(A,B) & A>0 <- ?available(N,M); UjN=N-1; -+available(UjN,M);?available(I,J);.print("Maradt:",I,",",J); -takenWc[source(percept)].

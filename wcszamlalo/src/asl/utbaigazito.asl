@@ -6,4 +6,4 @@
 
 /* Plans */
 
-+!kqml_received(A,B,C,_) : A == person & B == tell <- helloworld2.getClosest(C); .print(A," ",C,"-t mondott"); sensordetect.
++!kqml_received(A,B,C,_) : A == person & B == tell <- helloworld2.getClosest(C); .print(A," ",C,"-t mondott").
