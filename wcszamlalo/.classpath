@@ -4,7 +4,7 @@
 	<classpathentry excluding="*.asl" kind="src" path="src/asl"/>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="lib" path="C:/Users/Balint/Downloads/jason-2.1/libs/jason-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Balint/workspace/jadetest/commons-codec-1.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Balint/workspace/jadetest/jade.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Balint/workspace/jadetest/commons-codec-1.3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

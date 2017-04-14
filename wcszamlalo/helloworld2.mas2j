@@ -2,14 +2,13 @@ MAS helloworld2 {
 
 	infrastructure: Centralised
 
-	environment: TestEnv
+	environment: main.TestEnv
 
 	agents:
 		foglaltszamlalo;
 		mantoiletsensor #5;
 		person;
 		utbaigazito;
-		sample_agent ;
 
 	aslSourcePath:
 		"src/asl";
