@@ -22,7 +22,7 @@ import jason.environment.grid.GridWorldView;
 
 public class View extends GridWorldView {
 
-	TestEnv environment;
+	private TestEnv environment;
 	
 	private JPanel panel;
 	private JTextField textField_3;
@@ -30,8 +30,6 @@ public class View extends GridWorldView {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_4;
-	JButton ManToiletTakenButton;
-	JButton ManToiletFreeButton;
 	
 	public View(GridWorldModel model, String title, int windowSize) {
 		super(model, title, windowSize);
@@ -415,12 +413,12 @@ public class View extends GridWorldView {
 		gbc_label_9.gridy = 3;
 		ControlPanel.add(label_9, gbc_label_9);
 		
-		JButton btnUrinalFree = new JButton("Urinal free");
+		JButton ManUrinalFreeButton = new JButton("Urinal free");
 		GridBagConstraints gbc_btnUrinalFree = new GridBagConstraints();
 		gbc_btnUrinalFree.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUrinalFree.gridx = 2;
 		gbc_btnUrinalFree.gridy = 3;
-		ControlPanel.add(btnUrinalFree, gbc_btnUrinalFree);
+		ControlPanel.add(ManUrinalFreeButton, gbc_btnUrinalFree);
 		
 		JLabel label_10 = new JLabel("");
 		GridBagConstraints gbc_label_10 = new GridBagConstraints();
@@ -438,7 +436,7 @@ public class View extends GridWorldView {
 		gbc_label_11.gridy = 4;
 		ControlPanel.add(label_11, gbc_label_11);
 		
-		ManToiletTakenButton = new JButton("Toilet take");
+		JButton ManToiletTakenButton = new JButton("Toilet take");
 		GridBagConstraints gbc_btnToiletTake = new GridBagConstraints();
 		gbc_btnToiletTake.insets = new Insets(0, 0, 5, 5);
 		gbc_btnToiletTake.gridx = 2;
@@ -469,12 +467,12 @@ public class View extends GridWorldView {
 		gbc_label_14.gridy = 5;
 		ControlPanel.add(label_14, gbc_label_14);
 		
-		JButton btnToiletFree = new JButton("Toilet free");
+		JButton ManToiletFreeButton = new JButton("Toilet free");
 		GridBagConstraints gbc_btnToiletFree = new GridBagConstraints();
 		gbc_btnToiletFree.insets = new Insets(0, 0, 5, 5);
 		gbc_btnToiletFree.gridx = 2;
 		gbc_btnToiletFree.gridy = 5;
-		ControlPanel.add(btnToiletFree, gbc_btnToiletFree);
+		ControlPanel.add(ManToiletFreeButton, gbc_btnToiletFree);
 		
 		JLabel label_3 = new JLabel("#");
 		GridBagConstraints gbc_label_3 = new GridBagConstraints();
@@ -528,11 +526,27 @@ public class View extends GridWorldView {
 			}
 		});
 		
+		ManToiletFreeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.ManToiletFree();
+			}
+		});
+		
 		ManUrinalTakenButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				environment.ManUrinalTaken();
+			}
+		});
+		
+		ManUrinalFreeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.ManUrinalFree();
 			}
 		});
 	}

@@ -59,9 +59,19 @@ public class TestEnv extends jason.environment.Environment {
 		addPercept("mantoiletsensor1", Literal.parseLiteral("takenWc"));
 	}
 	
+	public void ManToiletFree() {
+		clearPercepts("mantoiletsensor1");
+		addPercept("mantoiletsensor1", Literal.parseLiteral("freeWc"));
+	}
+	
 	public void ManUrinalTaken() {
 		clearPercepts("mantoiletsensor1");
 		addPercept("mantoiletsensor1", Literal.parseLiteral("takenUrin"));
+	}
+	
+	public void ManUrinalFree() {
+		clearPercepts("mantoiletsensor1");
+		addPercept("mantoiletsensor1", Literal.parseLiteral("freeUrin"));
 	}
 
 
@@ -70,5 +80,6 @@ public class TestEnv extends jason.environment.Environment {
 	public void stop() {
 		super.stop();
 	}
+
 
 }
