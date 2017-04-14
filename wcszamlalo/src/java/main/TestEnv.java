@@ -18,7 +18,7 @@ public class TestEnv extends jason.environment.Environment {
 	/** Called before the MAS execution with the args informed in .mas2j */
 	@Override
 	public void init(String[] args) {
-		addPercept("mantoiletsensor1", Literal.parseLiteral("available(2,3)"));
+//		addPercept("mantoiletsensor1", Literal.parseLiteral("available(2,3)"));
 		addPercept("mantoiletsensor2", Literal.parseLiteral("available(2,3)"));
 		addPercept("mantoiletsensor3", Literal.parseLiteral("available(2,3)"));
 		addPercept("mantoiletsensor4", Literal.parseLiteral("available(2,3)"));
@@ -35,9 +35,8 @@ public class TestEnv extends jason.environment.Environment {
 				Literal.parseLiteral("position(\"I E 410\")"));
 
 		WorldModel wm = new WorldModel();
-		view = new View(wm, "WCCounter", 600);
+		view = new View(wm, "WCCounter", 350);
 		view.setEnv(this);
-
 	}
 
 	@Override
@@ -56,13 +55,15 @@ public class TestEnv extends jason.environment.Environment {
 	}
 
 	public void ManToiletTaken() {
+		clearPercepts("mantoiletsensor1");
 		addPercept("mantoiletsensor1", Literal.parseLiteral("takenWc"));
 	}
-
-	public void addNewEntry() {
-		addPercept(Literal.parseLiteral("change"));
-		System.out.println("asdasdsdasd");
+	
+	public void ManUrinalTaken() {
+		clearPercepts("mantoiletsensor1");
+		addPercept("mantoiletsensor1", Literal.parseLiteral("takenUrin"));
 	}
+
 
 	/** Called before the end of MAS execution */
 	@Override
