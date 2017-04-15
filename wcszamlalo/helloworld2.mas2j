@@ -6,7 +6,6 @@ MAS helloworld2 {
 
 	agents:
 		foglaltszamlalo;
-		mantoiletsensor #21;
 		person;
 		utbaigazito;
 

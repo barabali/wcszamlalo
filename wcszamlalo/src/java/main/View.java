@@ -26,8 +26,8 @@ public class View extends GridWorldView {
 	
 	private JPanel panel;
 	private JTextField textField_3;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField manToiletTextField;
+	private JTextField manUrineTextField;
 	private JTextField textField_2;
 	private JTextField textField_4;
 	
@@ -319,14 +319,14 @@ public class View extends GridWorldView {
 		gbc_label_4.gridy = 0;
 		ControlPanel.add(label_4, gbc_label_4);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"IE222", "IB135"}));
+		JComboBox selectedToiletJComboBox = new JComboBox();
+		selectedToiletJComboBox.setModel(new DefaultComboBoxModel(new String[] {"IE-210", "IB404"}));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.BOTH;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 0;
-		ControlPanel.add(comboBox, gbc_comboBox);
+		ControlPanel.add(selectedToiletJComboBox, gbc_comboBox);
 		
 		JLabel label_5 = new JLabel("");
 		GridBagConstraints gbc_label_5 = new GridBagConstraints();
@@ -491,14 +491,14 @@ public class View extends GridWorldView {
 		ControlPanel.add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
 		
-		textField_1 = new JTextField();
+		manUrineTextField = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.gridx = 2;
 		gbc_textField_1.gridy = 6;
-		ControlPanel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		ControlPanel.add(manUrineTextField, gbc_textField_1);
+		manUrineTextField.setColumns(10);
 		
 		textField_4 = new JTextField();
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
@@ -509,20 +509,20 @@ public class View extends GridWorldView {
 		ControlPanel.add(textField_4, gbc_textField_4);
 		textField_4.setColumns(10);
 		
-		textField = new JTextField();
+		manToiletTextField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.fill = GridBagConstraints.BOTH;
 		gbc_textField.insets = new Insets(0, 0, 0, 5);
 		gbc_textField.gridx = 2;
 		gbc_textField.gridy = 7;
-		ControlPanel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		ControlPanel.add(manToiletTextField, gbc_textField);
+		manToiletTextField.setColumns(10);
 		
 		ManToiletTakenButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletTaken("IB404");
+				environment.ManToiletTaken(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
 		
@@ -530,7 +530,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletFree("IB404");
+				environment.ManToiletFree(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
 		
@@ -538,7 +538,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalTaken("IE-210");
+				environment.ManUrinalTaken(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
 		
@@ -546,13 +546,21 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalFree("IE-210");
+				environment.ManUrinalFree(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
 	}
 
 	public void setEnv(TestEnv testEnv) {
 		environment=testEnv;
+	}
+	
+	public void setTextOfManUrinal(String text) {
+		manUrineTextField.setText(text);
+	}
+	
+	public void setTextOfManToilet(String text) {
+		manToiletTextField.setText(text);
 	}
 
 }

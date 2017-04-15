@@ -1,10 +1,8 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import jason.asSyntax.Literal;
@@ -18,11 +16,12 @@ public class TestEnv extends jason.environment.Environment {
 	
 	Map<String,Integer> toiletmap=new HashMap<String,Integer>();
 	View view;
+	WorldModel wm;
 
 	/** Called before the MAS execution with the args informed in .mas2j */
 	@Override
 	public void init(String[] args) {
-		WorldModel wm = new WorldModel();
+		wm = new WorldModel();
 		
 		int count = 1;
 
@@ -79,26 +78,85 @@ public class TestEnv extends jason.environment.Environment {
 		int count=toiletmap.get(param);
 		clearPercepts("mantoiletsensor"+count);
 		addPercept("mantoiletsensor"+count, Literal.parseLiteral("takenWc"));
+		
+		if (count <= 7) {
+			wm.getManToiletListE().get(count-1).decToilet();
+		} else if (count <= 14) {
+			wm.getManToiletListL().get(count-8).decToilet();
+		} else {
+			wm.getManToiletListB().get(count-15).decToilet();
+		}
+		
+		ManToilet mt;
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		mt.decToilet();
+		
+		view.setTextOfManToilet(String.valueOf(mt.getToilet()));
 	}
 	
 	public void ManToiletFree(String param) {
 		int count=toiletmap.get(param);
 		clearPercepts("mantoiletsensor"+count);
 		addPercept("mantoiletsensor"+count, Literal.parseLiteral("freeWc"));
+		
+		ManToilet mt;
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		mt.incToilet();
+		
+		view.setTextOfManToilet(String.valueOf(mt.getToilet()));
 	}
 	
 	public void ManUrinalTaken(String param) {
 		int count=toiletmap.get(param);
 		clearPercepts("mantoiletsensor"+count);
 		addPercept("mantoiletsensor"+count, Literal.parseLiteral("takenUrin"));
+		
+		ManToilet mt;
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		mt.decUrine();
+		
+		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
 	}
 	
 	public void ManUrinalFree(String param) {
 		int count=toiletmap.get(param);
 		clearPercepts("mantoiletsensor"+count);
 		addPercept("mantoiletsensor"+count, Literal.parseLiteral("freeUrin"));
+		
+		ManToilet mt;
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		mt.incUrine();
+		
+		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
 	}
-
 
 	/** Called before the end of MAS execution */
 	@Override

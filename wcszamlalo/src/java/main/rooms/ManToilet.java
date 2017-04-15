@@ -1,19 +1,39 @@
 package main.rooms;
 
 public class ManToilet {
-	private int toilet;
-	private int urine;
-	public ManToilet(int toilet, int urine) {
-		this.toilet = toilet;
-		this.urine = urine;
+	private int toilet, maxToilet;
+	private int urine, maxUrine;
+	public ManToilet(int t, int u) {
+		toilet = maxToilet = t;
+		urine = maxUrine = u;
 	}
 
 	public int getToilet() {
 		return toilet;
 	}
+	
+	public void incToilet() {
+		if (toilet < maxToilet)
+			toilet++;
+	}
+	
+	public void decToilet() {
+		if (toilet > 0)
+			toilet--;
+	}
 
 	public int getUrine() {
 		return urine;
+	}
+	
+	public void incUrine() {
+		if (urine < maxUrine)
+			urine++;
+	}
+	
+	public void decUrine() {
+		if (urine > 0)
+			urine--;
 	}
 	
 	
