@@ -52,9 +52,6 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
-		System.out.println(toiletmap.get("IE-210"));
-		System.out.println(toiletmap.get("IB404"));
-		
 		view = new View(wm, "WCCounter", 350);
 		view.setEnv(this);
 	}
@@ -78,14 +75,6 @@ public class TestEnv extends jason.environment.Environment {
 		int count=toiletmap.get(param);
 		clearPercepts("mantoiletsensor"+count);
 		addPercept("mantoiletsensor"+count, Literal.parseLiteral("takenWc"));
-		
-		if (count <= 7) {
-			wm.getManToiletListE().get(count-1).decToilet();
-		} else if (count <= 14) {
-			wm.getManToiletListL().get(count-8).decToilet();
-		} else {
-			wm.getManToiletListB().get(count-15).decToilet();
-		}
 		
 		ManToilet mt;
 		if (count <= 7) {
@@ -156,6 +145,36 @@ public class TestEnv extends jason.environment.Environment {
 		mt.incUrine();
 		
 		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
+	}
+	
+	public String getManToilet(String param) {
+		int count=toiletmap.get(param);
+		ManToilet mt;
+		
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		return String.valueOf(mt.getToilet());
+	}
+	
+	public String getManUrine(String param) {
+		int count=toiletmap.get(param);
+		ManToilet mt;
+		
+		if (count <= 7) {
+			mt = wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			mt = wm.getManToiletListL().get(count-8);
+		} else {
+			mt = wm.getManToiletListB().get(count-15);
+		}
+		
+		return String.valueOf(mt.getUrine());
 	}
 
 	/** Called before the end of MAS execution */

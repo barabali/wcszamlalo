@@ -6,8 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -518,6 +519,16 @@ public class View extends GridWorldView {
 		ControlPanel.add(manToiletTextField, gbc_textField);
 		manToiletTextField.setColumns(10);
 		
+		selectedToiletJComboBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				manToiletTextField.setText(environment.getManToilet(selectedToiletJComboBox.getSelectedItem().toString()));
+				manUrineTextField.setText(environment.getManUrine(selectedToiletJComboBox.getSelectedItem().toString()));
+			}
+			
+		});
+		
 		ManToiletTakenButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -549,6 +560,9 @@ public class View extends GridWorldView {
 				environment.ManUrinalFree(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
+		
+		manToiletTextField.setText("2");
+		manUrineTextField.setText("3");
 	}
 
 	public void setEnv(TestEnv testEnv) {
