@@ -32,8 +32,17 @@ public class View extends GridWorldView {
 	private JTextField textField_2;
 	private JTextField textField_4;
 	
-	public View(GridWorldModel model, String title, int windowSize) {
+	private JComboBox selectedToiletJComboBox;
+	
+	public View(GridWorldModel model, String title, int windowSize, TestEnv e) {
 		super(model, title, windowSize);
+		
+		environment = e;
+		
+		selectedToiletJComboBox.setModel(new DefaultComboBoxModel(environment.getRooms()));
+		manToiletTextField.setText(environment.getManToilet(selectedToiletJComboBox.getItemAt(0).toString()));
+		manUrineTextField.setText(environment.getManUrine(selectedToiletJComboBox.getItemAt(0).toString()));
+		
 		setVisible(true);
         repaint();
 	}
@@ -320,8 +329,7 @@ public class View extends GridWorldView {
 		gbc_label_4.gridy = 0;
 		ControlPanel.add(label_4, gbc_label_4);
 		
-		JComboBox selectedToiletJComboBox = new JComboBox();
-		selectedToiletJComboBox.setModel(new DefaultComboBoxModel(new String[] {"IE-210", "IB404"}));
+		selectedToiletJComboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.BOTH;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -560,13 +568,6 @@ public class View extends GridWorldView {
 				environment.ManUrinalFree(selectedToiletJComboBox.getSelectedItem().toString());
 			}
 		});
-		
-		manToiletTextField.setText("2");
-		manUrineTextField.setText("3");
-	}
-
-	public void setEnv(TestEnv testEnv) {
-		environment=testEnv;
 	}
 	
 	public void setTextOfManUrinal(String text) {

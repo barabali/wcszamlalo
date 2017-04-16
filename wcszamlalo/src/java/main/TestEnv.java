@@ -3,6 +3,7 @@ package main;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import jason.asSyntax.Literal;
@@ -52,8 +53,11 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
-		view = new View(wm, "WCCounter", 350);
-		view.setEnv(this);
+		System.out.println("elotte");
+		
+		view = new View(wm, "WCCounter", 350, this);
+		
+		System.out.println("utana");
 	}
 
 	@Override
@@ -175,6 +179,19 @@ public class TestEnv extends jason.environment.Environment {
 		}
 		
 		return String.valueOf(mt.getUrine());
+	}
+	
+	public String[] getRooms() {
+		Set<String> s = toiletmap.keySet();
+		
+		String[] rooms = new String[s.size()];
+		int i = 0;
+		
+		for (String a : s) {
+			rooms[i++] = a;
+		}
+		
+		return rooms;
 	}
 
 	/** Called before the end of MAS execution */
