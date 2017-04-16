@@ -6,7 +6,6 @@ MAS helloworld2 {
 
 	agents:
 		foglaltszamlalo #3;
-		person;
 		utbaigazito;
 
 	aslSourcePath:

@@ -26,7 +26,7 @@ public class View extends GridWorldView {
 	private TestEnv environment;
 	
 	private JPanel panel;
-	private JTextField textField_3;
+	private JTextField ResultText;
 	private JTextField manToiletTextField;
 	private JTextField manUrineTextField;
 	private JTextField textField_2;
@@ -272,14 +272,15 @@ public class View extends GridWorldView {
 		gbc_label_28.gridy = 5;
 		panel_1.add(label_28, gbc_label_28);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		ResultText = new JTextField();
+		ResultText.setColumns(10);
+		ResultText.setEditable(false);
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_3.gridx = 3;
 		gbc_textField_3.gridy = 5;
-		panel_1.add(textField_3, gbc_textField_3);
+		panel_1.add(ResultText, gbc_textField_3);
 		
 		JLabel label_29 = new JLabel("");
 		GridBagConstraints gbc_label_29 = new GridBagConstraints();
@@ -575,7 +576,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.findWc("I","Two","Toilet");				
+				environment.findWc("E","2","manToilet");				
 			}
 		});
 	}
@@ -586,6 +587,10 @@ public class View extends GridWorldView {
 	
 	public void setTextOfManToilet(String text) {
 		manToiletTextField.setText(text);
+	}
+
+	public void showResult(String res) {
+		ResultText.setText(res);
 	}
 
 }

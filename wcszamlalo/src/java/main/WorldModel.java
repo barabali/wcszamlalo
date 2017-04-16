@@ -81,7 +81,16 @@ public class WorldModel extends GridWorldModel{
 		return disabledToiletList;
 	}
 	
-	
+	public List<ManToilet> getMyWingManToilets(String wing){
+		switch(wing){
+		case "E":
+			return manToiletListE;
+		case "B":
+			return manToiletListB;
+		default:
+			return manToiletListL;
+		}
+	}
 
 	
 }

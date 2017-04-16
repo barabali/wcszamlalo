@@ -50,7 +50,12 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
+		addPercept("foglaltszamlalo1",Literal.parseLiteral("szarny(E)"));
+		addPercept("foglaltszamlalo2",Literal.parseLiteral("szarny(L)"));
+		addPercept("foglaltszamlalo3",Literal.parseLiteral("szarny(B)"));
+		
 		view = new View(wm, "WCCounter", 350, this);
+		
 	}
 
 	@Override
@@ -59,9 +64,10 @@ public class TestEnv extends jason.environment.Environment {
 			addPercept("person", Literal.parseLiteral("change"));
 			return true;
 		}
-
-		if (action.getFunctor().equals("sensordetect")) {
-			addPercept("mantoiletsensor1", Literal.parseLiteral("takenWc"));
+		if(action.getFunctor().equals("printResult")){
+			String command=action.toString();
+			String res=command.substring(command.indexOf("(")+1,command.indexOf(")"));
+			view.showResult(res);
 			return true;
 		}
 
