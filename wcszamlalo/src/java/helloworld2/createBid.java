@@ -3,6 +3,7 @@
 package helloworld2;
 
 import java.util.List;
+import java.util.Random;
 
 import main.WorldModel;
 import main.rooms.ManToilet;
@@ -25,7 +26,7 @@ public class createBid extends DefaultInternalAction {
     		List<ManToilet> toilets=wm.getMyWingManToilets(wing);
     		
     	}
-    	
-    	return un.unifies(args[4],new NumberTermImpl(6));
+    	int answer=new Random().nextInt(100);
+    	return un.unifies(args[4],new NumberTermImpl(answer));
     }
 }
