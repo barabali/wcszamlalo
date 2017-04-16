@@ -501,6 +501,7 @@ public class View extends GridWorldView {
 		textField_2.setColumns(10);
 		
 		manUrineTextField = new JTextField();
+		manUrineTextField.setEditable(false);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
@@ -519,6 +520,7 @@ public class View extends GridWorldView {
 		textField_4.setColumns(10);
 		
 		manToiletTextField = new JTextField();
+		manToiletTextField.setEditable(false);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.fill = GridBagConstraints.BOTH;
 		gbc_textField.insets = new Insets(0, 0, 0, 5);

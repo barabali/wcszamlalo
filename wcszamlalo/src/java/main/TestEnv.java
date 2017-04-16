@@ -29,35 +29,25 @@ public class TestEnv extends jason.environment.Environment {
 		List<ManToilet> manToilets = wm.getManToiletListE();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			ManToilet mt = manToilets.get(i);
 			toiletmap.put("IE"+String.valueOf(i-2)+"10",count);
-			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
 			count++;
 		}
 		
 		manToilets = wm.getManToiletListL();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			ManToilet mt = manToilets.get(i);
 			toiletmap.put("IE"+String.valueOf(i-2)+"08",count);
-			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
 			count++;
 		}
 		
 		manToilets = wm.getManToiletListB();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			ManToilet mt = manToilets.get(i);
 			toiletmap.put("IB"+String.valueOf(i-2)+"04",count);
-			addPercept("mantoiletsensor"+count, Literal.parseLiteral("available("+mt.getToilet()+","+mt.getUrine()+")"));			
 			count++;
 		}
 		
-		System.out.println("elotte");
-		
 		view = new View(wm, "WCCounter", 350, this);
-		
-		System.out.println("utana");
 	}
 
 	@Override
@@ -74,20 +64,21 @@ public class TestEnv extends jason.environment.Environment {
 
 		return false;
 	}
+	
+	private ManToilet getManToiletByParam(String param) {
+		int count=toiletmap.get(param);
+		
+		if (count <= 7) {
+			return wm.getManToiletListE().get(count-1);
+		} else if (count <= 14) {
+			return wm.getManToiletListL().get(count-8);
+		} else {
+			return wm.getManToiletListB().get(count-15);
+		}
+	}
 
 	public void ManToiletTaken(String param) {
-		int count=toiletmap.get(param);
-		clearPercepts("mantoiletsensor"+count);
-		addPercept("mantoiletsensor"+count, Literal.parseLiteral("takenWc"));
-		
-		ManToilet mt;
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		mt.decToilet();
 		
@@ -95,18 +86,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	public void ManToiletFree(String param) {
-		int count=toiletmap.get(param);
-		clearPercepts("mantoiletsensor"+count);
-		addPercept("mantoiletsensor"+count, Literal.parseLiteral("freeWc"));
-		
-		ManToilet mt;
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		mt.incToilet();
 		
@@ -114,18 +94,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	public void ManUrinalTaken(String param) {
-		int count=toiletmap.get(param);
-		clearPercepts("mantoiletsensor"+count);
-		addPercept("mantoiletsensor"+count, Literal.parseLiteral("takenUrin"));
-		
-		ManToilet mt;
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		mt.decUrine();
 		
@@ -133,50 +102,21 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	public void ManUrinalFree(String param) {
-		int count=toiletmap.get(param);
-		clearPercepts("mantoiletsensor"+count);
-		addPercept("mantoiletsensor"+count, Literal.parseLiteral("freeUrin"));
-		
-		ManToilet mt;
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		mt.incUrine();
 		
 		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
 	}
-	
+
 	public String getManToilet(String param) {
-		int count=toiletmap.get(param);
-		ManToilet mt;
-		
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		return String.valueOf(mt.getToilet());
 	}
 	
 	public String getManUrine(String param) {
-		int count=toiletmap.get(param);
-		ManToilet mt;
-		
-		if (count <= 7) {
-			mt = wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			mt = wm.getManToiletListL().get(count-8);
-		} else {
-			mt = wm.getManToiletListB().get(count-15);
-		}
+		ManToilet mt = getManToiletByParam(param);
 		
 		return String.valueOf(mt.getUrine());
 	}
