@@ -19,6 +19,20 @@ public class WorldModel extends GridWorldModel{
 	List<WomanToilet> womanToiletListL;
 	List<DisabledToilet> disabledToiletList;
 	
+	// singleton pattern
+    protected static WorldModel model = null;
+    
+    synchronized public static WorldModel create() {
+        if (model == null) {
+            model = new WorldModel();
+        }
+        return model;
+    }
+    
+    public static WorldModel get() {
+        return model;
+    }
+	
 	protected WorldModel() {
 		super(1,1,1);
 		

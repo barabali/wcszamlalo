@@ -6,4 +6,4 @@
 
 /* Plans */
 
-+getWc(X, Y, Z): true <- .broadcast(ilf, m(X, Y, Z)); -getWc(X, Y, Z)[source(percept)].
++getWc(X, Y, Z): true <- .broadcast(askAll, m(X, Y, Z)); -getWc(X, Y, Z)[source(percept)].

@@ -24,7 +24,8 @@ public class TestEnv extends jason.environment.Environment {
 	/** Called before the MAS execution with the args informed in .mas2j */
 	@Override
 	public void init(String[] args) {
-		wm = new WorldModel();
+		WorldModel.create();
+		wm = WorldModel.get();
 		
 		int count = 1;
 
