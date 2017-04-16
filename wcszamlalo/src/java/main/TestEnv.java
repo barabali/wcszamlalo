@@ -6,8 +6,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import jason.asSyntax.ListTerm;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
+import jason.asSyntax.Term;
 import main.rooms.ManToilet;
 
 public class TestEnv extends jason.environment.Environment {
@@ -132,6 +134,18 @@ public class TestEnv extends jason.environment.Environment {
 		}
 		
 		return rooms;
+	}
+	
+	public void findWc(String pos,String level, String type){
+		clearPercepts("utbaigazito");
+		addPercept("utbaigazito",Literal.parseLiteral("getWc("+
+				"\""+pos+"\""+
+				","+
+				"\""+level+"\""+
+				","+
+				"\""+type+"\""+
+				")")
+		);
 	}
 
 	/** Called before the end of MAS execution */

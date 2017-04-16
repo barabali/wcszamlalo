@@ -5,7 +5,7 @@ MAS helloworld2 {
 	environment: main.TestEnv
 
 	agents:
-		foglaltszamlalo;
+		foglaltszamlalo #3;
 		person;
 		utbaigazito;
 

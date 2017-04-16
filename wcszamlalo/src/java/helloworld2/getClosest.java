@@ -7,7 +7,8 @@ import jason.asSemantics.*;
 import jason.asSyntax.*;
 
 public class getClosest extends DefaultInternalAction {
-
+private int a=5;
+	
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         // execute the internal action
@@ -15,8 +16,8 @@ public class getClosest extends DefaultInternalAction {
 //        if (true) { // just to show how to throw another kind of exception
 //            throw new JasonException("not implemented!");
 //        }
-        String place=args[0].toString();
-        ts.getAg().getLogger().info(place);
+        ts.getAg().getLogger().info("hello: "+a);
+        a++;
         // everything ok, so returns true
         return true;
     }

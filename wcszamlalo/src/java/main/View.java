@@ -233,12 +233,12 @@ public class View extends GridWorldView {
 		gbc_label_25.gridy = 3;
 		panel_1.add(label_25, gbc_label_25);
 		
-		JButton button_2 = new JButton("Toilet");
+		JButton findMeAManToiletButton = new JButton("Toilet");
 		GridBagConstraints gbc_button_2 = new GridBagConstraints();
 		gbc_button_2.insets = new Insets(0, 0, 5, 5);
 		gbc_button_2.gridx = 3;
 		gbc_button_2.gridy = 4;
-		panel_1.add(button_2, gbc_button_2);
+		panel_1.add(findMeAManToiletButton, gbc_button_2);
 		
 		JLabel label_26 = new JLabel("");
 		GridBagConstraints gbc_label_26 = new GridBagConstraints();
@@ -568,6 +568,14 @@ public class View extends GridWorldView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				environment.ManUrinalFree(selectedToiletJComboBox.getSelectedItem().toString());
+			}
+		});
+		
+		findMeAManToiletButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.findWc("I","Two","Toilet");				
 			}
 		});
 	}

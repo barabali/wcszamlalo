@@ -6,3 +6,4 @@
 
 /* Plans */
 
++!kqml_received(A,B,m(X, Y, Z),_) : A == utbaigazito & B == ilf <- .print(X, Y, Z).
