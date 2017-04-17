@@ -8,6 +8,7 @@ import java.util.Random;
 import jason.asSemantics.DefaultInternalAction;
 import jason.asSemantics.TransitionSystem;
 import jason.asSemantics.Unifier;
+import jason.asSyntax.NumberTerm;
 import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 import main.WorldModel;
@@ -22,8 +23,9 @@ public class createBid extends DefaultInternalAction {
     	String wing=args[0].toString();
     	String type=args[2].toString();
     	String myPos=args[3].toString();
-    	
-    	int level=Integer.parseInt(args[1].toString());
+    
+    	String levelstring=args[1].toString().substring(1,args[1].toString().lastIndexOf("\""));
+    	int level=Integer.parseInt(levelstring);
     	
     	if(type.equals("manToilet") || type.equals("manUrine")){
     		List<ManToilet> toilets=wm.getMyWingManToilets(wing);	
