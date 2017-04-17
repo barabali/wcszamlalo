@@ -48,9 +48,9 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
-		addPercept("foglaltszamlalo1",Literal.parseLiteral("szarny(E)"));
-		addPercept("foglaltszamlalo2",Literal.parseLiteral("szarny(L)"));
-		addPercept("foglaltszamlalo3",Literal.parseLiteral("szarny(B)"));
+		addPercept("foglaltszamlalo1",Literal.parseLiteral("szarny(\"E\")"));
+		addPercept("foglaltszamlalo2",Literal.parseLiteral("szarny(\"L\")"));
+		addPercept("foglaltszamlalo3",Literal.parseLiteral("szarny(\"B\")"));
 		
 		view = new View(wm, "WCCounter", 350, this);
 		
