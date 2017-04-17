@@ -29,8 +29,8 @@ public class View extends GridWorldView {
 	private JTextField ResultText;
 	private JTextField manToiletTextField;
 	private JTextField manUrineTextField;
-	private JTextField textField_2;
-	private JTextField textField_4;
+	private JTextField womanToiletTextField;
+	private JTextField disabledToiletTextField;
 	
 	private JComboBox selectedToiletJComboBox;
 	
@@ -58,14 +58,14 @@ public class View extends GridWorldView {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		panel.add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("UI", null, panel_1, null);
+		JPanel UIPanel = new JPanel();
+		tabbedPane.addTab("UI", null, UIPanel, null);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] {0, 0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[] {0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0,0.0, 0.0, 0.0};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		panel_1.setLayout(gbl_panel_1);
+		UIPanel.setLayout(gbl_panel_1);
 		
 		JLabel label = new JLabel("Level");
 		GridBagConstraints gbc_label = new GridBagConstraints();
@@ -73,15 +73,15 @@ public class View extends GridWorldView {
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 0;
-		panel_1.add(label, gbc_label);
+		UIPanel.add(label, gbc_label);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"-2", "-1", "0", "1", "2", "3", "4"}));
+		JComboBox levelSelectorJComboBox = new JComboBox();
+		levelSelectorJComboBox.setModel(new DefaultComboBoxModel(new String[] {"-2", "-1", "0", "1", "2", "3", "4"}));
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.gridx = 1;
 		gbc_comboBox_1.gridy = 0;
-		panel_1.add(comboBox_1, gbc_comboBox_1);
+		UIPanel.add(levelSelectorJComboBox, gbc_comboBox_1);
 		
 		JLabel lblWing = new JLabel("Wing");
 		GridBagConstraints gbc_lblWing = new GridBagConstraints();
@@ -89,15 +89,15 @@ public class View extends GridWorldView {
 		gbc_lblWing.insets = new Insets(0, 0, 5, 5);
 		gbc_lblWing.gridx = 3;
 		gbc_lblWing.gridy = 0;
-		panel_1.add(lblWing, gbc_lblWing);
+		UIPanel.add(lblWing, gbc_lblWing);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"B", "L", "E"}));
+		JComboBox wingSelectorJComboBox = new JComboBox();
+		wingSelectorJComboBox.setModel(new DefaultComboBoxModel(new String[] {"B", "L", "E"}));
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_2.gridx = 4;
 		gbc_comboBox_2.gridy = 0;
-		panel_1.add(comboBox_2, gbc_comboBox_2);
+		UIPanel.add(wingSelectorJComboBox, gbc_comboBox_2);
 		
 		JLabel label_15 = new JLabel("");
 		GridBagConstraints gbc_label_15 = new GridBagConstraints();
@@ -105,7 +105,7 @@ public class View extends GridWorldView {
 		gbc_label_15.insets = new Insets(0, 0, 5, 5);
 		gbc_label_15.gridx = 5;
 		gbc_label_15.gridy = 0;
-		panel_1.add(label_15, gbc_label_15);
+		UIPanel.add(label_15, gbc_label_15);
 		
 		JLabel label_16 = new JLabel("");
 		GridBagConstraints gbc_label_16 = new GridBagConstraints();
@@ -113,7 +113,7 @@ public class View extends GridWorldView {
 		gbc_label_16.insets = new Insets(0, 0, 5, 0);
 		gbc_label_16.gridx = 9;
 		gbc_label_16.gridy = 0;
-		panel_1.add(label_16, gbc_label_16);
+		UIPanel.add(label_16, gbc_label_16);
 		
 		JLabel lblWonam = new JLabel("Woman");
 		GridBagConstraints gbc_lblWonam = new GridBagConstraints();
@@ -121,7 +121,7 @@ public class View extends GridWorldView {
 		gbc_lblWonam.insets = new Insets(0, 0, 5, 5);
 		gbc_lblWonam.gridx = 0;
 		gbc_lblWonam.gridy = 1;
-		panel_1.add(lblWonam, gbc_lblWonam);
+		UIPanel.add(lblWonam, gbc_lblWonam);
 		
 		JLabel label_17 = new JLabel("");
 		GridBagConstraints gbc_label_17 = new GridBagConstraints();
@@ -129,7 +129,7 @@ public class View extends GridWorldView {
 		gbc_label_17.insets = new Insets(0, 0, 5, 5);
 		gbc_label_17.gridx = 1;
 		gbc_label_17.gridy = 1;
-		panel_1.add(label_17, gbc_label_17);
+		UIPanel.add(label_17, gbc_label_17);
 		
 		JLabel lblMan = new JLabel("Man");
 		GridBagConstraints gbc_lblMan = new GridBagConstraints();
@@ -137,7 +137,7 @@ public class View extends GridWorldView {
 		gbc_lblMan.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMan.gridx = 3;
 		gbc_lblMan.gridy = 1;
-		panel_1.add(lblMan, gbc_lblMan);
+		UIPanel.add(lblMan, gbc_lblMan);
 		
 		JLabel lblDisabled = new JLabel("Disabled");
 		GridBagConstraints gbc_lblDisabled = new GridBagConstraints();
@@ -145,7 +145,7 @@ public class View extends GridWorldView {
 		gbc_lblDisabled.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDisabled.gridx = 4;
 		gbc_lblDisabled.gridy = 1;
-		panel_1.add(lblDisabled, gbc_lblDisabled);
+		UIPanel.add(lblDisabled, gbc_lblDisabled);
 		
 		JLabel label_19 = new JLabel("");
 		GridBagConstraints gbc_label_19 = new GridBagConstraints();
@@ -153,14 +153,14 @@ public class View extends GridWorldView {
 		gbc_label_19.insets = new Insets(0, 0, 5, 5);
 		gbc_label_19.gridx = 8;
 		gbc_label_19.gridy = 1;
-		panel_1.add(label_19, gbc_label_19);
+		UIPanel.add(label_19, gbc_label_19);
 		
-		JButton button = new JButton("+");
+		JButton findMeAWomanToiletButton = new JButton("+");
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 5, 5);
 		gbc_button.gridx = 0;
 		gbc_button.gridy = 2;
-		panel_1.add(button, gbc_button);
+		UIPanel.add(findMeAWomanToiletButton, gbc_button);
 		
 		JLabel label_20 = new JLabel("");
 		GridBagConstraints gbc_label_20 = new GridBagConstraints();
@@ -168,21 +168,21 @@ public class View extends GridWorldView {
 		gbc_label_20.insets = new Insets(0, 0, 5, 5);
 		gbc_label_20.gridx = 1;
 		gbc_label_20.gridy = 2;
-		panel_1.add(label_20, gbc_label_20);
+		UIPanel.add(label_20, gbc_label_20);
 		
-		JButton button_1 = new JButton("Urinal");
+		JButton findMeAManUrinalButton = new JButton("Urinal");
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.insets = new Insets(0, 0, 5, 5);
 		gbc_button_1.gridx = 3;
 		gbc_button_1.gridy = 2;
-		panel_1.add(button_1, gbc_button_1);
+		UIPanel.add(findMeAManUrinalButton, gbc_button_1);
 		
-		JButton button_3 = new JButton("+");
+		JButton findMeADisabledToiletButton = new JButton("+");
 		GridBagConstraints gbc_button_3 = new GridBagConstraints();
 		gbc_button_3.insets = new Insets(0, 0, 5, 5);
 		gbc_button_3.gridx = 4;
 		gbc_button_3.gridy = 2;
-		panel_1.add(button_3, gbc_button_3);
+		UIPanel.add(findMeADisabledToiletButton, gbc_button_3);
 		
 		JLabel label_21 = new JLabel("");
 		GridBagConstraints gbc_label_21 = new GridBagConstraints();
@@ -190,7 +190,7 @@ public class View extends GridWorldView {
 		gbc_label_21.insets = new Insets(0, 0, 5, 5);
 		gbc_label_21.gridx = 5;
 		gbc_label_21.gridy = 2;
-		panel_1.add(label_21, gbc_label_21);
+		UIPanel.add(label_21, gbc_label_21);
 		
 		JLabel label_22 = new JLabel("");
 		GridBagConstraints gbc_label_22 = new GridBagConstraints();
@@ -198,7 +198,7 @@ public class View extends GridWorldView {
 		gbc_label_22.insets = new Insets(0, 0, 5, 5);
 		gbc_label_22.gridx = 8;
 		gbc_label_22.gridy = 2;
-		panel_1.add(label_22, gbc_label_22);
+		UIPanel.add(label_22, gbc_label_22);
 		
 		JLabel label_18 = new JLabel("");
 		GridBagConstraints gbc_label_18 = new GridBagConstraints();
@@ -206,7 +206,7 @@ public class View extends GridWorldView {
 		gbc_label_18.insets = new Insets(0, 0, 5, 5);
 		gbc_label_18.gridx = 2;
 		gbc_label_18.gridy = 3;
-		panel_1.add(label_18, gbc_label_18);
+		UIPanel.add(label_18, gbc_label_18);
 		
 		JLabel label_23 = new JLabel("");
 		GridBagConstraints gbc_label_23 = new GridBagConstraints();
@@ -214,7 +214,7 @@ public class View extends GridWorldView {
 		gbc_label_23.insets = new Insets(0, 0, 5, 5);
 		gbc_label_23.gridx = 0;
 		gbc_label_23.gridy = 4;
-		panel_1.add(label_23, gbc_label_23);
+		UIPanel.add(label_23, gbc_label_23);
 		
 		JLabel label_24 = new JLabel("");
 		GridBagConstraints gbc_label_24 = new GridBagConstraints();
@@ -222,7 +222,7 @@ public class View extends GridWorldView {
 		gbc_label_24.insets = new Insets(0, 0, 5, 5);
 		gbc_label_24.gridx = 1;
 		gbc_label_24.gridy = 4;
-		panel_1.add(label_24, gbc_label_24);
+		UIPanel.add(label_24, gbc_label_24);
 		
 		JLabel label_25 = new JLabel("");
 		GridBagConstraints gbc_label_25 = new GridBagConstraints();
@@ -231,14 +231,14 @@ public class View extends GridWorldView {
 		gbc_label_25.insets = new Insets(0, 0, 5, 5);
 		gbc_label_25.gridx = 5;
 		gbc_label_25.gridy = 3;
-		panel_1.add(label_25, gbc_label_25);
+		UIPanel.add(label_25, gbc_label_25);
 		
 		JButton findMeAManToiletButton = new JButton("Toilet");
 		GridBagConstraints gbc_button_2 = new GridBagConstraints();
 		gbc_button_2.insets = new Insets(0, 0, 5, 5);
 		gbc_button_2.gridx = 3;
 		gbc_button_2.gridy = 4;
-		panel_1.add(findMeAManToiletButton, gbc_button_2);
+		UIPanel.add(findMeAManToiletButton, gbc_button_2);
 		
 		JLabel label_26 = new JLabel("");
 		GridBagConstraints gbc_label_26 = new GridBagConstraints();
@@ -246,7 +246,7 @@ public class View extends GridWorldView {
 		gbc_label_26.insets = new Insets(0, 0, 5, 5);
 		gbc_label_26.gridx = 8;
 		gbc_label_26.gridy = 4;
-		panel_1.add(label_26, gbc_label_26);
+		UIPanel.add(label_26, gbc_label_26);
 		
 		JLabel label_27 = new JLabel("");
 		GridBagConstraints gbc_label_27 = new GridBagConstraints();
@@ -254,7 +254,7 @@ public class View extends GridWorldView {
 		gbc_label_27.insets = new Insets(0, 0, 5, 0);
 		gbc_label_27.gridx = 9;
 		gbc_label_27.gridy = 4;
-		panel_1.add(label_27, gbc_label_27);
+		UIPanel.add(label_27, gbc_label_27);
 		
 		JLabel label_1 = new JLabel("Result:");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
@@ -262,7 +262,7 @@ public class View extends GridWorldView {
 		gbc_label_1.insets = new Insets(0, 0, 0, 5);
 		gbc_label_1.gridx = 0;
 		gbc_label_1.gridy = 5;
-		panel_1.add(label_1, gbc_label_1);
+		UIPanel.add(label_1, gbc_label_1);
 		
 		JLabel label_28 = new JLabel("");
 		GridBagConstraints gbc_label_28 = new GridBagConstraints();
@@ -270,7 +270,7 @@ public class View extends GridWorldView {
 		gbc_label_28.insets = new Insets(0, 0, 0, 5);
 		gbc_label_28.gridx = 1;
 		gbc_label_28.gridy = 5;
-		panel_1.add(label_28, gbc_label_28);
+		UIPanel.add(label_28, gbc_label_28);
 		
 		ResultText = new JTextField();
 		ResultText.setColumns(10);
@@ -280,7 +280,7 @@ public class View extends GridWorldView {
 		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
 		gbc_textField_3.gridx = 3;
 		gbc_textField_3.gridy = 5;
-		panel_1.add(ResultText, gbc_textField_3);
+		UIPanel.add(ResultText, gbc_textField_3);
 		
 		JLabel label_29 = new JLabel("");
 		GridBagConstraints gbc_label_29 = new GridBagConstraints();
@@ -288,7 +288,7 @@ public class View extends GridWorldView {
 		gbc_label_29.insets = new Insets(0, 0, 0, 5);
 		gbc_label_29.gridx = 7;
 		gbc_label_29.gridy = 5;
-		panel_1.add(label_29, gbc_label_29);
+		UIPanel.add(label_29, gbc_label_29);
 		
 		JLabel label_30 = new JLabel("");
 		GridBagConstraints gbc_label_30 = new GridBagConstraints();
@@ -296,14 +296,14 @@ public class View extends GridWorldView {
 		gbc_label_30.insets = new Insets(0, 0, 0, 5);
 		gbc_label_30.gridx = 8;
 		gbc_label_30.gridy = 5;
-		panel_1.add(label_30, gbc_label_30);
+		UIPanel.add(label_30, gbc_label_30);
 		
 		JLabel label_31 = new JLabel("");
 		GridBagConstraints gbc_label_31 = new GridBagConstraints();
 		gbc_label_31.fill = GridBagConstraints.BOTH;
 		gbc_label_31.gridx = 9;
 		gbc_label_31.gridy = 5;
-		panel_1.add(label_31, gbc_label_31);
+		UIPanel.add(label_31, gbc_label_31);
 		
 		JPanel ControlPanel = new JPanel();
 		tabbedPane.addTab("Control", null, ControlPanel, null);
@@ -492,14 +492,15 @@ public class View extends GridWorldView {
 		gbc_label_3.gridy = 6;
 		ControlPanel.add(label_3, gbc_label_3);
 		
-		textField_2 = new JTextField();
+		womanToiletTextField = new JTextField();
+		womanToiletTextField.setEditable(false);
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 6;
-		ControlPanel.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		ControlPanel.add(womanToiletTextField, gbc_textField_2);
+		womanToiletTextField.setColumns(10);
 		
 		manUrineTextField = new JTextField();
 		manUrineTextField.setEditable(false);
@@ -511,14 +512,15 @@ public class View extends GridWorldView {
 		ControlPanel.add(manUrineTextField, gbc_textField_1);
 		manUrineTextField.setColumns(10);
 		
-		textField_4 = new JTextField();
+		disabledToiletTextField = new JTextField();
+		disabledToiletTextField.setEditable(false);
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_4.gridx = 3;
 		gbc_textField_4.gridy = 6;
-		ControlPanel.add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		ControlPanel.add(disabledToiletTextField, gbc_textField_4);
+		disabledToiletTextField.setColumns(10);
 		
 		manToiletTextField = new JTextField();
 		manToiletTextField.setEditable(false);
@@ -576,7 +578,47 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.findWc("E","2","manToilet");				
+				environment.findWc(
+						wingSelectorJComboBox.getSelectedItem().toString(),
+						levelSelectorJComboBox.getSelectedItem().toString(),
+						"manToilet"
+				);				
+			}
+		});
+		
+		findMeAManUrinalButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.findWc(
+						wingSelectorJComboBox.getSelectedItem().toString(),
+						levelSelectorJComboBox.getSelectedItem().toString(),
+						"manUrinal"
+				);				
+			}
+		});
+		
+		findMeADisabledToiletButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.findWc(
+						wingSelectorJComboBox.getSelectedItem().toString(),
+						levelSelectorJComboBox.getSelectedItem().toString(),
+						"disabledToilet"
+				);				
+			}
+		});
+		
+		findMeAWomanToiletButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.findWc(
+						wingSelectorJComboBox.getSelectedItem().toString(),
+						levelSelectorJComboBox.getSelectedItem().toString(),
+						"womanToilet"
+				);				
 			}
 		});
 	}

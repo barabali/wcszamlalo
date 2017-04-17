@@ -6,10 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import jason.asSyntax.ListTerm;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
-import jason.asSyntax.Term;
 import main.rooms.ManToilet;
 
 public class TestEnv extends jason.environment.Environment {
