@@ -632,7 +632,7 @@ public class View extends GridWorldView {
 	}
 
 	public void showResult(String res) {
-		ResultText.setText(res);
+		ResultText.setText(environment.getRoomNumber(res));
 	}
 
 }

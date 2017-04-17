@@ -90,7 +90,8 @@ public class createBid extends DefaultInternalAction {
     	
     	System.out.println("A(z) "+ myWing + " szarnyon levo agens valasztottja: "+myWing+a);
     	
-    	return un.unifies(args[4],new NumberTermImpl(answer));
+    	boolean result = un.unifies(args[4],new Atom(myWing+a+""));
+    	return result && un.unifies(args[5],new NumberTermImpl(answer));
     }
 
 	private int findClosestFree(int[] toiletmap, int level) {

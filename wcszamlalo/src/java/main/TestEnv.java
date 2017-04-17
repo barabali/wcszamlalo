@@ -159,5 +159,20 @@ public class TestEnv extends jason.environment.Environment {
 		super.stop();
 	}
 
+	public String getRoomNumber(String res) {
+		Set<String> s = toiletmap.keySet();
+		
+		String[] rooms = new String[s.size()];
+		int i = 0;
+		
+		for (String a : s) {
+			if (a.contains(res)) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+
 
 }

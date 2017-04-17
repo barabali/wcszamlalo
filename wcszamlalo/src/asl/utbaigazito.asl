@@ -8,7 +8,7 @@ number(1).
 
 +getWc(X, Y, Z): true <- ?number(A); B=A+1;-+number(B);.broadcast(askAll, m(X, Y, Z,B)); -getWc(X, Y, Z)[source(percept)].
 
-+place_bid(N,_)     // receives bids and checks for new winner
-   :  .findall(b(V,A),place_bid(N,V)[source(A)],L) & 
++place_bid(N,_,_)     // receives bids and checks for new winner
+   :  .findall(b(R,V,A),place_bid(N,R,V)[source(A)],L) & 
       .length(L,3)  // all 3 expected bids was received
-   <- .min(L,b(V,W)); printResult(V).
+   <- .min(L,b(R,V,W)); printResult(R).
