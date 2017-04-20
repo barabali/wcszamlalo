@@ -37,7 +37,7 @@ public class TestEnv extends jason.environment.Environment {
 		manToilets = wm.getManToiletListL();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IE"+String.valueOf(i-2)+"08",count);
+			toiletmap.put("IL"+String.valueOf(i-2)+"08",count);
 			count++;
 		}
 		
