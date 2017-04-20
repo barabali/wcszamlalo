@@ -75,7 +75,7 @@ public class View extends GridWorldView {
 		gbc_label.gridy = 0;
 		UIPanel.add(label, gbc_label);
 		
-		JComboBox levelSelectorJComboBox = new JComboBox();
+		final JComboBox levelSelectorJComboBox = new JComboBox();
 		levelSelectorJComboBox.setModel(new DefaultComboBoxModel(new String[] {"-2", "-1", "0", "1", "2", "3", "4"}));
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
@@ -91,7 +91,7 @@ public class View extends GridWorldView {
 		gbc_lblWing.gridy = 0;
 		UIPanel.add(lblWing, gbc_lblWing);
 		
-		JComboBox wingSelectorJComboBox = new JComboBox();
+		final JComboBox wingSelectorJComboBox = new JComboBox();
 		wingSelectorJComboBox.setModel(new DefaultComboBoxModel(new String[] {"B", "L", "E"}));
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
