@@ -538,6 +538,7 @@ public class View extends GridWorldView {
 			public void itemStateChanged(ItemEvent arg0) {
 				manToiletTextField.setText(environment.getManToilet(selectedToiletJComboBox.getSelectedItem().toString()));
 				manUrineTextField.setText(environment.getManUrine(selectedToiletJComboBox.getSelectedItem().toString()));
+				womanToiletTextField.setText(environment.getWomanToilet(selectedToiletJComboBox.getSelectedItem().toString()));
 			}
 			
 		});

@@ -13,6 +13,7 @@ import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 import main.WorldModel;
 import main.rooms.ManToilet;
+import main.rooms.WomanToilet;
 
 public class createBid extends DefaultInternalAction {
 
@@ -63,7 +64,9 @@ public class createBid extends DefaultInternalAction {
 		// a szárnyon lévő szabad helyek száma emeletenként
 		int[] toiletmap = null;
 
-		// A választott wc fajtája alapján elkéri a szárny wc-it
+		// A választott wc fajtája alapján elkéri a szárny szabad wc-it
+		
+		//Férfi wc
 		if (type.equals("manToilet")) {
 			List<ManToilet> toilets = wm.getMyWingManToilets(myWing);
 
@@ -73,7 +76,9 @@ public class createBid extends DefaultInternalAction {
 			for (ManToilet mt : toilets) {
 				toiletmap[i++] = mt.getToilet();
 			}
-		} else if (type.equals("manUrinal")) {
+		} 
+		//Férfi piszóár
+		else if (type.equals("manUrinal")) {
 			List<ManToilet> toilets = wm.getMyWingManToilets(myWing);
 
 			toiletmap = new int[toilets.size()];
@@ -82,9 +87,20 @@ public class createBid extends DefaultInternalAction {
 			for (ManToilet mt : toilets) {
 				toiletmap[i++] = mt.getUrine();
 			}
-		} else if (type.equals("womanToilet")) {
-			answer = new Random().nextInt(100);
-		} else if (type.equals("disabledToilet")) {
+		} 
+		//Női wc
+		else if (type.equals("womanToilet")) {
+			List<WomanToilet> toilets = wm.getMyWingWomanToilets(myWing);
+
+			toiletmap = new int[toilets.size()];
+
+			int i = 0;
+			for (WomanToilet mt : toilets) {
+				toiletmap[i++] = mt.getToilet();
+			}
+		} 
+		//Mozgáskorlátozott
+		else if (type.equals("disabledToilet")) {
 			answer = new Random().nextInt(100);
 		}
 
@@ -92,8 +108,11 @@ public class createBid extends DefaultInternalAction {
 		if(level<0){
 			level=0;
 		}
+		
 		int index = findClosestFree(toiletmap, level);		
 		int foundLevel = index ;
+		
+		//A szárnyak távolságához hozzáadja az emelet különbséget
 		answer += Math.abs(foundLevel-level);
 
 		System.out.println("A(z) " + myWing
