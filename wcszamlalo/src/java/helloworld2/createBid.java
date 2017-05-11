@@ -88,8 +88,12 @@ public class createBid extends DefaultInternalAction {
 			answer = new Random().nextInt(100);
 		}
 
-		int index = findClosestFree(toiletmap, level + 2);		
-		int foundLevel = index - 2;
+		//Ha minusz emeleten lennénk, az olyan mint a földszint
+		if(level<0){
+			level=0;
+		}
+		int index = findClosestFree(toiletmap, level);		
+		int foundLevel = index ;
 		answer += Math.abs(foundLevel-level);
 
 		System.out.println("A(z) " + myWing

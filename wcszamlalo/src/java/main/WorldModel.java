@@ -43,10 +43,10 @@ public class WorldModel extends GridWorldModel{
 		womanToiletListL=new ArrayList<WomanToilet>();
 		womanToiletListE=new ArrayList<WomanToilet>();
 		
-		for(int i=0;i<7;i++){
-			manToiletListB.add(new ManToilet(3, 7));
-			manToiletListE.add(new ManToilet(2, 3));
-			manToiletListL.add(new ManToilet(2, 3));
+		for(int i=0;i<5;i++){
+			manToiletListB.add(new ManToilet(3, 6));
+			manToiletListE.add(new ManToilet(2, 4));
+			manToiletListL.add(new ManToilet(2, 4));
 			womanToiletListB.add(new WomanToilet(5));
 			womanToiletListE.add(new WomanToilet(3));
 			womanToiletListL.add(new WomanToilet(3));
@@ -92,5 +92,14 @@ public class WorldModel extends GridWorldModel{
 		}
 	}
 
-	
+	public List<WomanToilet> getMyWingWomanToilets(String wing){
+		switch(wing){
+		case "E":
+			return womanToiletListE;
+		case "B":
+			return womanToiletListB;
+		default:
+			return womanToiletListL;
+		}
+	}
 }

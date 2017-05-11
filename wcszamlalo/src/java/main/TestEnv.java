@@ -30,21 +30,21 @@ public class TestEnv extends jason.environment.Environment {
 		List<ManToilet> manToilets = wm.getManToiletListE();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IE"+String.valueOf(i-2)+"10",count);
+			toiletmap.put("IE"+String.valueOf(i)+"10",count);
 			count++;
 		}
 		
 		manToilets = wm.getManToiletListL();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IL"+String.valueOf(i-2)+"08",count);
+			toiletmap.put("IL"+String.valueOf(i)+"08",count);
 			count++;
 		}
 		
 		manToilets = wm.getManToiletListB();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IB"+String.valueOf(i-2)+"04",count);
+			toiletmap.put("IB"+String.valueOf(i)+"04",count);
 			count++;
 		}
 		
@@ -75,12 +75,12 @@ public class TestEnv extends jason.environment.Environment {
 	private ManToilet getManToiletByParam(String param) {
 		int count=toiletmap.get(param);
 		
-		if (count <= 7) {
+		if (count <= 5) {
 			return wm.getManToiletListE().get(count-1);
-		} else if (count <= 14) {
-			return wm.getManToiletListL().get(count-8);
+		} else if (count <= 10) {
+			return wm.getManToiletListL().get(count-6);
 		} else {
-			return wm.getManToiletListB().get(count-15);
+			return wm.getManToiletListB().get(count-11);
 		}
 	}
 
@@ -162,15 +162,11 @@ public class TestEnv extends jason.environment.Environment {
 	public String getRoomNumber(String res) {
 		Set<String> s = toiletmap.keySet();
 		
-		String[] rooms = new String[s.size()];
-		int i = 0;
-		
 		for (String a : s) {
 			if (a.contains(res)) {
 				return a;
 			}
-		}
-		
+		}		
 		return null;
 	}
 
