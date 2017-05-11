@@ -11,6 +11,7 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import jason.asSyntax.Literal;
 import jason.asSyntax.Structure;
+import main.rooms.DisabledToilet;
 import main.rooms.ManToilet;
 import main.rooms.WomanToilet;
 
@@ -25,6 +26,7 @@ public class TestEnv extends jason.environment.Environment {
 	 */
 	private Map<String,Integer> mantoiletmap=new HashMap<String,Integer>();
 	private Map<String,Integer> womantoiletmap=new HashMap<String,Integer>();
+	private Map<String,Integer> disabledtoiletmap=new HashMap<String,Integer>();
 	
 	/**
 	 * A wc-k termének rendezett listája, a control panelen hogy sorban legyen itt összegyűjti
@@ -115,6 +117,10 @@ public class TestEnv extends jason.environment.Environment {
 			toiletRoomsInOrder.add("IB"+String.valueOf(i)+"05");
 			count++;
 		}
+		
+		//Mozgássérültből csak 1 van
+		disabledtoiletmap.put("IB011", 0);
+		toiletRoomsInOrder.add("IB011");
 	}
 
 	/**
@@ -139,8 +145,8 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return ManToilet
 	 */
 	private ManToilet getManToiletByParam(String param) {
-		int count=mantoiletmap.get(param);
-		if(count>15){
+		Integer count=mantoiletmap.get(param);
+		if(count==null){
 			return null;
 		}
 		if (count <= 5) {
@@ -160,8 +166,8 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return ManToilet
 	 */
 	private WomanToilet getWomanToiletByParam(String param) {
-		int count=womantoiletmap.get(param);
-		if(count<=15){
+		Integer count=womantoiletmap.get(param);
+		if(count== null){
 			return null;
 		}
 		if (count <= 20) {
@@ -172,39 +178,68 @@ public class TestEnv extends jason.environment.Environment {
 			return wm.getWomanToiletListB().get(count-26);
 		}
 	}
-
-	public void ManToiletTaken(String param) {
+	
+	/**
+	 * Mozgássérült wc-re
+	 * A terem neve alaján generál számot, hogy melyik wc listából hányas wc referenciát 
+	 * keresse elő
+	 * @param param
+	 * @return ManToilet
+	 */
+	private DisabledToilet getDisabledToiletByParam(String param) {
+		Integer count=disabledtoiletmap.get(param);
+		if(count== null){
+			return null;
+		}
+		return wm.getDisabledToiletList().get(count);
+	}
+	
+	/**
+	 * Kezeli a férfi wc-kben történő foglalást, felszabadulást
+	 * @param param
+	 * @param increase Ha igaz, akkor felszabadul hely
+	 * @param type
+	 */
+	public void ManToiletNumberChange(String param,boolean increase,String type){
 		ManToilet mt = getManToiletByParam(param);
+		if(mt==null)
+			return;
 		
-		mt.decToilet();
+		if(type.equals("Toilet")){	//Ha toilet
+			if(increase)
+				mt.incToilet();		//növel
+			else
+				mt.decToilet();		//csökkent
+		}else{						//Ha piszóár
+			if(increase)
+				mt.incUrine();		//növel
+			else
+				mt.decUrine();		//csökkent
+		}
 		
 		view.setTextOfManToilet(String.valueOf(mt.getToilet()));
-	}
-	
-	public void ManToiletFree(String param) {
-		ManToilet mt = getManToiletByParam(param);
-		
-		mt.incToilet();
-		
-		view.setTextOfManToilet(String.valueOf(mt.getToilet()));
-	}
-	
-	public void ManUrinalTaken(String param) {
-		ManToilet mt = getManToiletByParam(param);
-		
-		mt.decUrine();
-		
-		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
-	}
-	
-	public void ManUrinalFree(String param) {
-		ManToilet mt = getManToiletByParam(param);
-		
-		mt.incUrine();
-		
 		view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
 	}
 
+	/**
+	 * Kezeli a női wc-kben történő foglalást, felszabadulást
+	 * @param param
+	 * @param increase
+	 * @param type
+	 */
+	public void WomanToiletNumberChange(String param,boolean increase){
+		WomanToilet mt = getWomanToiletByParam(param);
+		if(mt==null)
+			return;
+		
+			if(increase)
+				mt.incToilet();		//növel
+			else
+				mt.decToilet();		//csökkent
+		
+		view.setTextOfWomanToilet(String.valueOf(mt.getToilet()));
+	}
+	
 	/**
 	 * Visszatér a paraméterül kapott wc-ben lévő szabad wc-k számával
 	 * Ha nincs ilyen, akkor -
@@ -246,6 +281,21 @@ public class TestEnv extends jason.environment.Environment {
 		}
 		return String.valueOf(wmt.getToilet());
 	}
+	
+	/**
+	 * Visszatér a paraméterül kapott mozgássérült wc-ben lévő szabad wc-k számával
+	 * Ha nincs ilyen akkor -
+	 * @param param
+	 * @return
+	 */
+	public String getDisabledToilet(String param) {
+		DisabledToilet wmt = getDisabledToiletByParam(param);
+		if(wmt==null){
+			return "-";
+		}
+		return String.valueOf(wmt.getToilet());
+	}
+	
 	/**
 	 * A control fülre való termek listáját adja vissza
 	 * @return

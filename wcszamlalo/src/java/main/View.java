@@ -386,26 +386,34 @@ public class View extends GridWorldView {
 		gbc_label_7.gridy = 2;
 		ControlPanel.add(label_7, gbc_label_7);
 		
-		JButton ManUrinalTakenButton = new JButton("Urinal take");
 		
-		JButton button_4 = new JButton("+");
+		JButton WomanToiletTakenButton = new JButton("Toilet take");
 		GridBagConstraints gbc_button_4 = new GridBagConstraints();
 		gbc_button_4.insets = new Insets(0, 0, 5, 5);
 		gbc_button_4.gridx = 1;
 		gbc_button_4.gridy = 2;
-		ControlPanel.add(button_4, gbc_button_4);
+		ControlPanel.add(WomanToiletTakenButton, gbc_button_4);
+		
+		JButton ManUrinalTakenButton = new JButton("Urinal take");
 		GridBagConstraints gbc_button_5 = new GridBagConstraints();
 		gbc_button_5.insets = new Insets(0, 0, 5, 5);
 		gbc_button_5.gridx = 2;
 		gbc_button_5.gridy = 2;
 		ControlPanel.add(ManUrinalTakenButton, gbc_button_5);
 		
-		JButton button_7 = new JButton("+");
+		JButton DisabledToiletTakenButton = new JButton("Take");
 		GridBagConstraints gbc_button_7 = new GridBagConstraints();
 		gbc_button_7.insets = new Insets(0, 0, 5, 0);
 		gbc_button_7.gridx = 3;
 		gbc_button_7.gridy = 2;
-		ControlPanel.add(button_7, gbc_button_7);
+		ControlPanel.add(DisabledToiletTakenButton, gbc_button_7);
+		
+		JButton DisabledToiletFreeButton = new JButton("Free");
+		GridBagConstraints gbc_button_110 = new GridBagConstraints();
+		gbc_button_110.insets = new Insets(0, 0, 5, 0);
+		gbc_button_110.gridx = 3;
+		gbc_button_110.gridy = 3;
+		ControlPanel.add(DisabledToiletFreeButton, gbc_button_110);
 		
 		JLabel label_8 = new JLabel("");
 		GridBagConstraints gbc_label_8 = new GridBagConstraints();
@@ -429,6 +437,13 @@ public class View extends GridWorldView {
 		gbc_btnUrinalFree.gridx = 2;
 		gbc_btnUrinalFree.gridy = 3;
 		ControlPanel.add(ManUrinalFreeButton, gbc_btnUrinalFree);
+		
+		JButton WomanToiletFreeButton = new JButton("Toilet free");
+		GridBagConstraints gbc_btnToiletFree = new GridBagConstraints();
+		gbc_btnToiletFree.insets = new Insets(0, 0, 5, 5);
+		gbc_btnToiletFree.gridx = 1;
+		gbc_btnToiletFree.gridy = 3;
+		ControlPanel.add(WomanToiletFreeButton, gbc_btnToiletFree);
 		
 		JLabel label_10 = new JLabel("");
 		GridBagConstraints gbc_label_10 = new GridBagConstraints();
@@ -478,11 +493,11 @@ public class View extends GridWorldView {
 		ControlPanel.add(label_14, gbc_label_14);
 		
 		JButton ManToiletFreeButton = new JButton("Toilet free");
-		GridBagConstraints gbc_btnToiletFree = new GridBagConstraints();
-		gbc_btnToiletFree.insets = new Insets(0, 0, 5, 5);
-		gbc_btnToiletFree.gridx = 2;
-		gbc_btnToiletFree.gridy = 5;
-		ControlPanel.add(ManToiletFreeButton, gbc_btnToiletFree);
+		GridBagConstraints gbc_btnManToiletFree = new GridBagConstraints();
+		gbc_btnManToiletFree.insets = new Insets(0, 0, 5, 5);
+		gbc_btnManToiletFree.gridx = 2;
+		gbc_btnManToiletFree.gridy = 5;
+		ControlPanel.add(ManToiletFreeButton, gbc_btnManToiletFree);
 		
 		JLabel label_3 = new JLabel("#");
 		GridBagConstraints gbc_label_3 = new GridBagConstraints();
@@ -539,6 +554,7 @@ public class View extends GridWorldView {
 				manToiletTextField.setText(environment.getManToilet(selectedToiletJComboBox.getSelectedItem().toString()));
 				manUrineTextField.setText(environment.getManUrine(selectedToiletJComboBox.getSelectedItem().toString()));
 				womanToiletTextField.setText(environment.getWomanToilet(selectedToiletJComboBox.getSelectedItem().toString()));
+				disabledToiletTextField.setText(environment.getDisabledToilet(selectedToiletJComboBox.getSelectedItem().toString()));
 			}
 			
 		});
@@ -547,7 +563,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletTaken(selectedToiletJComboBox.getSelectedItem().toString());
+				environment.ManToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),false,"Toilet");
 			}
 		});
 		
@@ -555,7 +571,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManToiletFree(selectedToiletJComboBox.getSelectedItem().toString());
+				environment.ManToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),true,"Toilet");
 			}
 		});
 		
@@ -563,7 +579,7 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalTaken(selectedToiletJComboBox.getSelectedItem().toString());
+				environment.ManToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),false,"Urinal");
 			}
 		});
 		
@@ -571,7 +587,23 @@ public class View extends GridWorldView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				environment.ManUrinalFree(selectedToiletJComboBox.getSelectedItem().toString());
+				environment.ManToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),true,"Urinal");
+			}
+		});
+		
+		WomanToiletFreeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.WomanToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),true);
+			}
+		});
+		
+		WomanToiletTakenButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.WomanToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),false);
 			}
 		});
 		
@@ -631,9 +663,14 @@ public class View extends GridWorldView {
 	public void setTextOfManToilet(String text) {
 		manToiletTextField.setText(text);
 	}
+	
+	public void setTextOfWomanToilet(String tex){
+		womanToiletTextField.setText(tex);
+	}
 
 	public void showResult(String res) {
 		ResultText.setText(environment.getRoomNumber(res));
 	}
+	
 
 }
