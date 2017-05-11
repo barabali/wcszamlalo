@@ -42,6 +42,7 @@ public class WorldModel extends GridWorldModel{
 		womanToiletListB=new ArrayList<WomanToilet>();
 		womanToiletListL=new ArrayList<WomanToilet>();
 		womanToiletListE=new ArrayList<WomanToilet>();
+		disabledToiletList=new ArrayList<DisabledToilet>();
 		
 		//Földszinten van ami nagyobb wc, mint a többi emeleten, szóval azokat külön megadjuk
 		manToiletListB.add(new ManToilet(6,10));
@@ -50,7 +51,7 @@ public class WorldModel extends GridWorldModel{
 		womanToiletListB.add(new WomanToilet(6));
 		womanToiletListE.add(new WomanToilet(3));
 		womanToiletListL.add(new WomanToilet(3));
-		
+		disabledToiletList.add(new DisabledToilet(1));
 		for(int i=0;i<4;i++){
 			manToiletListB.add(new ManToilet(3, 6));
 			manToiletListE.add(new ManToilet(2, 4));
@@ -109,5 +110,9 @@ public class WorldModel extends GridWorldModel{
 		default:
 			return womanToiletListL;
 		}
+	}
+
+	public List<DisabledToilet> getMyWingDisabledToilets(String myWing) {
+		return disabledToiletList;
 	}
 }

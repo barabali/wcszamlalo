@@ -12,6 +12,7 @@ import jason.asSyntax.Atom;
 import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 import main.WorldModel;
+import main.rooms.DisabledToilet;
 import main.rooms.ManToilet;
 import main.rooms.WomanToilet;
 
@@ -34,32 +35,7 @@ public class createBid extends DefaultInternalAction {
 		int answer = 0;
 
 		// Meghatározom hogy milyen messze vagyok a választott szárnytól
-		// 1-saját 2-azonos oldal 3-másik oldal
-		if (myWing.equals("E")) {
-			if (wing.equals("E")) {
-				answer = 1;
-			} else if (wing.equals("L")) {
-				answer = 2;
-			} else if (wing.equals("B")) {
-				answer = 3;
-			}
-		} else if (myWing.equals("L")) {
-			if (wing.equals("E")) {
-				answer = 2;
-			} else if (wing.equals("L")) {
-				answer = 1;
-			} else if (wing.equals("B")) {
-				answer = 3;
-			}
-		} else if (myWing.equals("B")) {
-			if (wing.equals("E")) {
-				answer = 3;
-			} else if (wing.equals("L")) {
-				answer = 3;
-			} else if (wing.equals("B")) {
-				answer = 1;
-			}
-		}
+		answer = calculateWingDistance(wing, myWing, answer);
 
 		// a szárnyon lévő szabad helyek száma emeletenként
 		int[] toiletmap = null;
@@ -99,9 +75,16 @@ public class createBid extends DefaultInternalAction {
 				toiletmap[i++] = mt.getToilet();
 			}
 		} 
-		//Mozgáskorlátozott
-		else if (type.equals("disabledToilet")) {
-			answer = new Random().nextInt(100);
+		//Ha mozgáskorlátozott akkor is végigszámolja a dolgokat, de nem számít a végén
+		if (type.equals("disabledToilet")) {
+			List<DisabledToilet> toilets = wm.getMyWingDisabledToilets(myWing);
+
+			toiletmap = new int[toilets.size()];
+
+			int i = 0;
+			for (DisabledToilet mt : toilets) {
+				toiletmap[i++] = mt.getToilet();
+			}
 		}
 
 		//Ha minusz emeleten lennénk, az olyan mint a földszint
@@ -121,10 +104,55 @@ public class createBid extends DefaultInternalAction {
 		System.out.println("A(z) " + myWing
 				+ " szarnyon levo agens licitértéke: " + answer);
 
+		//Ha mozgáskorlátozott akkor csak 1 terem lehet a vége
+		if (type.equals("disabledToilet")) {
+			answer=0;
+			myWing="B";
+			foundLevel=0;
+		}
+		
+		
 		//Visszatér a talált emelet-szárny-típus kombinációval
 		boolean result = un.unifies(args[4], new Atom(myWing + foundLevel+":"+type + ""));
 		//És visszatér a licit értékével
 		return result && un.unifies(args[5], new NumberTermImpl(answer));
+	}
+
+	/**
+	 * Meghatározom hogy milyen messze vagyok a választott szárnytól
+	 * 1-saját 2-azonos oldal 3-másik oldal
+	 * @param wing
+	 * @param myWing
+	 * @param answer
+	 * @return
+	 */
+	private int calculateWingDistance(String wing, String myWing, int answer) {
+		if (myWing.equals("E")) {
+			if (wing.equals("E")) {
+				answer = 1;
+			} else if (wing.equals("L")) {
+				answer = 2;
+			} else if (wing.equals("B")) {
+				answer = 3;
+			}
+		} else if (myWing.equals("L")) {
+			if (wing.equals("E")) {
+				answer = 2;
+			} else if (wing.equals("L")) {
+				answer = 1;
+			} else if (wing.equals("B")) {
+				answer = 3;
+			}
+		} else if (myWing.equals("B")) {
+			if (wing.equals("E")) {
+				answer = 3;
+			} else if (wing.equals("L")) {
+				answer = 3;
+			} else if (wing.equals("B")) {
+				answer = 1;
+			}
+		}
+		return answer;
 	}
 
 	/**

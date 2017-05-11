@@ -292,7 +292,10 @@ public class TestEnv extends jason.environment.Environment {
 					return a;
 				}
 			}
-		}		
+		}
+		if(parameters[1].equals("disabledToilet")){
+			return "IB011";
+		}
 		Set<String> s = mantoiletmap.keySet();
 		
 		for (String a : s) {
