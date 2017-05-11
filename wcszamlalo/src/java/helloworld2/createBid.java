@@ -121,7 +121,9 @@ public class createBid extends DefaultInternalAction {
 		System.out.println("A(z) " + myWing
 				+ " szarnyon levo agens licitértéke: " + answer);
 
-		boolean result = un.unifies(args[4], new Atom(myWing + foundLevel + ""));
+		//Visszatér a talált emelet-szárny-típus kombinációval
+		boolean result = un.unifies(args[4], new Atom(myWing + foundLevel+":"+type + ""));
+		//És visszatér a licit értékével
 		return result && un.unifies(args[5], new NumberTermImpl(answer));
 	}
 

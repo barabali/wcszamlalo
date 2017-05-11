@@ -23,7 +23,8 @@ public class TestEnv extends jason.environment.Environment {
 	 * A map amiben terem - szám párosok vannak, ezzel lehet kezelni 
 	 * hogy melyik wc listát kérjük le (5-értékenként másikat)
 	 */
-	private Map<String,Integer> toiletmap=new HashMap<String,Integer>();
+	private Map<String,Integer> mantoiletmap=new HashMap<String,Integer>();
+	private Map<String,Integer> womantoiletmap=new HashMap<String,Integer>();
 	
 	/**
 	 * A wc-k termének rendezett listája, a control panelen hogy sorban legyen itt összegyűjti
@@ -56,10 +57,11 @@ public class TestEnv extends jason.environment.Environment {
 	 */
 	private void createToiletListForToiletMap() {
 		int count=1;
+		//Férfi wc-kre
 		List<ManToilet> manToilets = wm.getManToiletListE();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IE"+String.valueOf(i)+"10",count);		//A toiletmapba helyezi
+			mantoiletmap.put("IE"+String.valueOf(i)+"10",count);		//A toiletmapba helyezi
 			toiletRoomsInOrder.add("IE"+String.valueOf(i)+"10");	//A rendezett listába szúrja
 			count++;
 		}
@@ -67,7 +69,7 @@ public class TestEnv extends jason.environment.Environment {
 		manToilets = wm.getManToiletListL();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
-			toiletmap.put("IL"+String.valueOf(i)+"08",count);
+			mantoiletmap.put("IL"+String.valueOf(i)+"08",count);
 			toiletRoomsInOrder.add("IL"+String.valueOf(i)+"08");
 			count++;
 		}
@@ -75,21 +77,20 @@ public class TestEnv extends jason.environment.Environment {
 		manToilets = wm.getManToiletListB();
 		
 		//A földszinten eltér a számozás
-		toiletmap.put("IB009",count);
+		mantoiletmap.put("IB009",count);
 		toiletRoomsInOrder.add("IB009");
 		count++;
 		
 		for (int i = 1; i < manToilets.size(); ++i) {
-			toiletmap.put("IB"+String.valueOf(i)+"04",count);
+			mantoiletmap.put("IB"+String.valueOf(i)+"04",count);
 			toiletRoomsInOrder.add("IB"+String.valueOf(i)+"04");
 			count++;
 		}
 		
 		//Női wc-kre ugyanez
 		List<WomanToilet> womanToilets = wm.getWomanToiletListE();
-		
 		for (int i = 0; i < womanToilets.size(); ++i) {
-			toiletmap.put("IE"+String.valueOf(i)+"11",count);		
+			womantoiletmap.put("IE"+String.valueOf(i)+"11",count);		
 			toiletRoomsInOrder.add("IE"+String.valueOf(i)+"11");
 			count++;
 		}
@@ -97,7 +98,7 @@ public class TestEnv extends jason.environment.Environment {
 		womanToilets = wm.getWomanToiletListL();
 		
 		for (int i = 0; i < womanToilets.size(); ++i) {
-			toiletmap.put("IL"+String.valueOf(i)+"09",count);
+			womantoiletmap.put("IL"+String.valueOf(i)+"09",count);
 			toiletRoomsInOrder.add("IL"+String.valueOf(i)+"09");
 			count++;
 		}
@@ -105,30 +106,28 @@ public class TestEnv extends jason.environment.Environment {
 		womanToilets = wm.getWomanToiletListB();
 		
 		//Földszinten eltér a számozás
-		toiletmap.put("IB010",count);
+		womantoiletmap.put("IB010",count);
 		toiletRoomsInOrder.add("IB010");
 		count++;
 		
 		for (int i = 1; i < womanToilets.size(); ++i) {
-			toiletmap.put("IB"+String.valueOf(i)+"05",count);
+			womantoiletmap.put("IB"+String.valueOf(i)+"05",count);
 			toiletRoomsInOrder.add("IB"+String.valueOf(i)+"05");
 			count++;
 		}
 	}
 
+	/**
+	 * Ágens parancshívás esetén ez kezeli
+	 */
 	@Override
 	public boolean executeAction(String agName, Structure action) {
-		if (action.getFunctor().equals("burn")) {
-			addPercept("person", Literal.parseLiteral("change"));
-			return true;
-		}
 		if(action.getFunctor().equals("printResult")){
 			String command=action.toString();
 			String res=command.substring(command.indexOf("(")+1,command.indexOf(")"));
 			view.showResult(res);
 			return true;
 		}
-
 		return false;
 	}
 	
@@ -140,7 +139,7 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return ManToilet
 	 */
 	private ManToilet getManToiletByParam(String param) {
-		int count=toiletmap.get(param);
+		int count=mantoiletmap.get(param);
 		if(count>15){
 			return null;
 		}
@@ -161,7 +160,7 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return ManToilet
 	 */
 	private WomanToilet getWomanToiletByParam(String param) {
-		int count=toiletmap.get(param);
+		int count=womantoiletmap.get(param);
 		if(count<=15){
 			return null;
 		}
@@ -252,15 +251,6 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return
 	 */
 	public String[] getRooms() {
-//		Set<String> s = toiletmap.keySet();
-//		
-//		String[] rooms = new String[s.size()];
-//		int i = 0;
-//		
-//		for (String a : s) {
-//			rooms[i++] = a;
-//		}
-//		return rooms;
 		String[] rooms = new String[toiletRoomsInOrder.size()];
 		rooms = toiletRoomsInOrder.toArray(rooms);
 		return rooms;
@@ -284,11 +274,29 @@ public class TestEnv extends jason.environment.Environment {
 		super.stop();
 	}
 
+	/**
+	 * Visszaadja a végeredmény teremszámot a kapott
+	 * emelet-szárny-típus paraméterek alapján
+	 * @param res
+	 * @return
+	 */
 	public String getRoomNumber(String res) {
-		Set<String> s = toiletmap.keySet();
+		//Eleje: szárny, elemet; Második: típus
+		String[] parameters=res.split(":");
+		
+		if(parameters[1].equals("womanToilet")){
+			Set<String> s = womantoiletmap.keySet();
+			
+			for (String a : s) {
+				if (a.contains(parameters[0])) {
+					return a;
+				}
+			}
+		}		
+		Set<String> s = mantoiletmap.keySet();
 		
 		for (String a : s) {
-			if (a.contains(res)) {
+			if (a.contains(parameters[0])) {
 				return a;
 			}
 		}		
