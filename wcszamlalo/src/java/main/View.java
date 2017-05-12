@@ -386,6 +386,13 @@ public class View extends GridWorldView {
 		gbc_label_7.gridy = 2;
 		ControlPanel.add(label_7, gbc_label_7);
 		
+		JButton CleaningStartButton = new JButton("Cleaning");
+		GridBagConstraints clean = new GridBagConstraints();
+		clean.insets = new Insets(0, 0, 5, 5);
+		clean.gridx = 3;
+		clean.gridy = 0;
+		ControlPanel.add(CleaningStartButton, clean);
+		
 		
 		JButton WomanToiletTakenButton = new JButton("Toilet take");
 		GridBagConstraints gbc_button_4 = new GridBagConstraints();
@@ -607,6 +614,30 @@ public class View extends GridWorldView {
 			}
 		});
 		
+		DisabledToiletTakenButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.DisabledToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),false);
+			}
+		});
+		
+		DisabledToiletFreeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.DisabledToiletNumberChange(selectedToiletJComboBox.getSelectedItem().toString(),true);
+			}
+		});
+		
+		CleaningStartButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				environment.ToiletClean(selectedToiletJComboBox.getSelectedItem().toString());				
+			}
+		});
+		
 		findMeAManToiletButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -666,6 +697,10 @@ public class View extends GridWorldView {
 	
 	public void setTextOfWomanToilet(String tex){
 		womanToiletTextField.setText(tex);
+	}
+	
+	public void setTextOfDisabledToilet(String tex){
+		disabledToiletTextField.setText(tex);
 	}
 
 	public void showResult(String res) {

@@ -95,6 +95,11 @@ public class createBid extends DefaultInternalAction {
 		int index = findClosestFree(toiletmap, level);		
 		int foundLevel = index ;
 		
+		//Ha a keresett és talált wc is a földszinten van, a az átjárás miatt bónuszt kap
+		if(level==0 && foundLevel==0){
+			answer-=2;
+		}
+		
 		//A szárnyak távolságához hozzáadja az emelet különbséget
 		answer += Math.abs(foundLevel-level);
 

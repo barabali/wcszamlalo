@@ -48,7 +48,7 @@ public class TestEnv extends jason.environment.Environment {
 		addPercept("foglaltszamlalo2",Literal.parseLiteral("szarny(\"L\")"));
 		addPercept("foglaltszamlalo3",Literal.parseLiteral("szarny(\"B\")"));
 		
-		view = new View(wm, "WCCounter", 350, this);
+		view = new View(wm, "WCCounter", 370, this);
 		
 	}
 
@@ -196,6 +196,7 @@ public class TestEnv extends jason.environment.Environment {
 	
 	/**
 	 * Kezeli a férfi wc-kben történő foglalást, felszabadulást
+	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
 	 * @param param
 	 * @param increase Ha igaz, akkor felszabadul hely
 	 * @param type
@@ -203,6 +204,9 @@ public class TestEnv extends jason.environment.Environment {
 	public void ManToiletNumberChange(String param,boolean increase,String type){
 		ManToilet mt = getManToiletByParam(param);
 		if(mt==null)
+			return;
+		
+		if(mt.getCleaning())
 			return;
 		
 		if(type.equals("Toilet")){	//Ha toilet
@@ -223,6 +227,7 @@ public class TestEnv extends jason.environment.Environment {
 
 	/**
 	 * Kezeli a női wc-kben történő foglalást, felszabadulást
+	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
 	 * @param param
 	 * @param increase
 	 * @param type
@@ -232,12 +237,58 @@ public class TestEnv extends jason.environment.Environment {
 		if(mt==null)
 			return;
 		
+		if(mt.getCleaning())
+			return;
+		
 			if(increase)
 				mt.incToilet();		//növel
 			else
 				mt.decToilet();		//csökkent
 		
 		view.setTextOfWomanToilet(String.valueOf(mt.getToilet()));
+	}
+	
+	/**
+	 * Kezeli a mozgáskorlátozott wc-(k)ben történő foglalást, felszabadulást
+	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
+	 * @param param
+	 * @param increase
+	 * @param type
+	 */
+	public void DisabledToiletNumberChange(String param,boolean increase){
+		DisabledToilet mt = getDisabledToiletByParam(param);
+		if(mt==null)
+			return;
+		
+		if(mt.getCleaning())
+			return;
+		
+			if(increase)
+				mt.incToilet();		//növel
+			else
+				mt.decToilet();		//csökkent
+		
+		view.setTextOfDisabledToilet(String.valueOf(mt.getToilet()));
+	}
+	
+	public void ToiletClean(String param){
+		ManToilet mt = getManToiletByParam(param);
+		WomanToilet wmt = getWomanToiletByParam(param);
+		DisabledToilet dt = getDisabledToiletByParam(param);
+		
+		if(mt!=null){
+			mt.changeCleaning();
+			view.setTextOfManUrinal(String.valueOf(mt.getUrine()));
+			view.setTextOfManToilet(String.valueOf(mt.getToilet()));
+		}
+		if(wmt!=null){
+			wmt.changeCleaning();
+			view.setTextOfWomanToilet(String.valueOf(wmt.getToilet()));
+		}
+		if(dt!=null){
+			dt.changeCleaning();
+			view.setTextOfDisabledToilet(String.valueOf(dt.getToilet()));
+		}
 	}
 	
 	/**
@@ -355,7 +406,5 @@ public class TestEnv extends jason.environment.Environment {
 		}		
 		return null;
 	}
-
-
 
 }

@@ -2,6 +2,8 @@ package main.rooms;
 
 public class DisabledToilet {
 	private int toilet, maxToilet;
+	private boolean cleaning=false;
+	
 	public DisabledToilet(int t) {
 		toilet = maxToilet = t;
 	}
@@ -18,5 +20,20 @@ public class DisabledToilet {
 	public void decToilet() {
 		if (toilet > 0)
 			toilet--;
+	}
+	
+	public void changeCleaning(){
+		if(cleaning){
+			toilet=maxToilet;
+			cleaning=false;
+		}
+		else {
+			toilet=0;
+			cleaning=true;
+		}
+	}
+	
+	public boolean getCleaning(){
+		return cleaning;
 	}
 }

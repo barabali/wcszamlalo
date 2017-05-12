@@ -3,6 +3,8 @@ package main.rooms;
 public class ManToilet {
 	private int toilet, maxToilet;
 	private int urine, maxUrine;
+	private boolean cleaning=false;
+	
 	public ManToilet(int t, int u) {
 		toilet = maxToilet = t;
 		urine = maxUrine = u;
@@ -36,5 +38,20 @@ public class ManToilet {
 			urine--;
 	}
 	
+	public void changeCleaning(){
+		if(cleaning){
+			urine=maxUrine;
+			toilet=maxToilet;
+			cleaning=false;
+		}
+		else {
+			urine=0;
+			toilet=0;
+			cleaning=true;
+		}
+	}
 	
+	public boolean getCleaning(){
+		return cleaning;
+	}
 }
