@@ -21,7 +21,7 @@ public class winner extends DefaultInternalAction {
     	
     	//A belső zárójeleket leveszi,a termet kiválasztja
     	for(int i=0;i<3;i++){
-    		licitrooms[i]=licits[i].substring(1,licits[0].length()-1).split(",")[0];
+    		licitrooms[i]=licits[i].substring(1,licits[i].length()-1).split(",")[0];
     	}
     	
     	//licit értékek

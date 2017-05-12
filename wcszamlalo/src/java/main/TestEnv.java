@@ -382,7 +382,8 @@ public class TestEnv extends jason.environment.Environment {
 	 * @return
 	 */
 	public String getRoomNumber(String res) {
-		//Eleje: szárny, elemet; Második: típus
+		//Első paramáter: szárny, elemet
+		//Második: típus
 		String[] parameters=res.split(":");
 		
 		if(parameters[1].equals("womanToilet")){
@@ -395,7 +396,13 @@ public class TestEnv extends jason.environment.Environment {
 			}
 		}
 		if(parameters[1].equals("disabledToilet")){
-			return "IB011";
+			Set<String> s = disabledtoiletmap.keySet();
+			
+			for (String a : s) {
+				if (a.contains(parameters[0])) {
+					return a;
+				}
+			}
 		}
 		Set<String> s = mantoiletmap.keySet();
 		
@@ -404,7 +411,7 @@ public class TestEnv extends jason.environment.Environment {
 				return a;
 			}
 		}		
-		return null;
+		return "";
 	}
 
 }

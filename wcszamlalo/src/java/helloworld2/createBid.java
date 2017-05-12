@@ -113,7 +113,6 @@ public class createBid extends DefaultInternalAction {
 		if (type.equals("disabledToilet")) {
 			answer=0;
 			myWing="B";
-			foundLevel=0;
 		}
 		
 		
@@ -186,7 +185,7 @@ public class createBid extends DefaultInternalAction {
 				indexDec = 0;
 
 			// Nem mehet a tömb mérete fölé
-			if (indexInc == toiletmap.length - 1)
+			if (indexInc >= toiletmap.length - 1)
 				indexInc = toiletmap.length - 1;
 
 			// Ha az egyikben több hely van, akkor azzal tér vissza
@@ -200,7 +199,7 @@ public class createBid extends DefaultInternalAction {
 			
 			//Ha mindkét irányban tele, akkor 
 			if (indexDec == 0 && indexInc == toiletmap.length-1)
-				return -1;
+				return 99;		//Ilyen teremszám nincs, így ezzel tér vissza
 		}
 
 		return -1;
