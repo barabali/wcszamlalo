@@ -11,4 +11,4 @@ number(1).
 +place_bid(N,_,_)     // receives bids and checks for new winner
    :  .findall(b(R,V),place_bid(N,R,V)[source(A)],L) & 
       .length(L,3)  // all 3 expected bids was received
-   <- helloworld2.winner(L,R); printResult(R).
+   <- main.defaultinternalactions.winner(L,R); printResult(R).
