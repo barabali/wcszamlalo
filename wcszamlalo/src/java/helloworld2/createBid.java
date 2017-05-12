@@ -167,9 +167,13 @@ public class createBid extends DefaultInternalAction {
 	 * @return
 	 */
 	private int findClosestFree(int[] toiletmap, int level) {
+		//Ha az emeleten ahol a felhasználó van nincs wc ez nem fut le
+		if(toiletmap.length>=level){			
 		// Ha a saját emeleten van szabad hely, rögtön visszatér vele
 		if (toiletmap[level] > 0)
 			return level;
+		}
+		
 
 		int indexInc = level, indexDec = level;
 
@@ -183,6 +187,10 @@ public class createBid extends DefaultInternalAction {
 			// Nem indexelhet minuszba
 			if (indexDec == -1)
 				indexDec = 0;
+			
+			//Minimum sem mehet a maximum fölé
+			if(indexDec >=toiletmap.length-1)
+				indexDec=0;
 
 			// Nem mehet a tömb mérete fölé
 			if (indexInc >= toiletmap.length - 1)
