@@ -3,6 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry excluding="*.asl" kind="src" path="src/asl"/>
 	<classpathentry kind="src" path="src/java"/>
-	<classpathentry kind="lib" path="C:/Users/firea/workspace/wcszamlalo/wcszamlalo/jason-2.1.jar"/>
+	<classpathentry kind="lib" path="jason-2.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
