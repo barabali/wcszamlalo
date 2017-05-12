@@ -1,6 +1,6 @@
 // Internal action code for project wcszamlalo
 
-package helloworld2;
+package main.defaultinternalactions;
 
 import java.util.List;
 import java.util.Random;

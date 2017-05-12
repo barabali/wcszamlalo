@@ -1,6 +1,6 @@
 // Internal action code for project wcszamlalo
 
-package helloworld2;
+package main.defaultinternalactions;
 
 import jason.*;
 import jason.asSemantics.*;
@@ -40,6 +40,7 @@ public class winner extends DefaultInternalAction {
 	private int findBest(int[] licitvalues) {
 		int min=licitvalues[0];
 		int index=0;
+		
 		for(int i=1;i<licitvalues.length;i++){
 			if(licitvalues[i]<min){
 				min=licitvalues[i];
