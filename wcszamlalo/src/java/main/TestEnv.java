@@ -21,15 +21,15 @@ public class TestEnv extends jason.environment.Environment {
 			+ TestEnv.class.getName());
 	
 	/**
-	 * A map amiben terem - szám párosok vannak, ezzel lehet kezelni 
-	 * hogy melyik wc listát kérjük le (5-értékenként másikat)
+	 * A map amiben terem - szĂˇm pĂˇrosok vannak, ezzel lehet kezelni 
+	 * hogy melyik wc listĂˇt kĂ©rjĂĽk le (5-Ă©rtĂ©kenkĂ©nt mĂˇsikat)
 	 */
 	private Map<String,Integer> mantoiletmap=new HashMap<String,Integer>();
 	private Map<String,Integer> womantoiletmap=new HashMap<String,Integer>();
 	private Map<String,Integer> disabledtoiletmap=new HashMap<String,Integer>();
 	
 	/**
-	 * A wc-k termének rendezett listája, a control panelen hogy sorban legyen itt összegyűjti
+	 * A wc-k termĂ©nek rendezett listĂˇja, a control panelen hogy sorban legyen itt Ă¶sszegyĹ±jti
 	 */
 	private List<String> toiletRoomsInOrder=new LinkedList<String>();
 	private View view;
@@ -48,23 +48,23 @@ public class TestEnv extends jason.environment.Environment {
 		addPercept("foglaltszamlalo2",Literal.parseLiteral("szarny(\"L\")"));
 		addPercept("foglaltszamlalo3",Literal.parseLiteral("szarny(\"B\")"));
 		
-		view = new View(wm, "WCCounter", 370, this);
+		view = new View(wm, "WCCounter", 450, this);
 		
 	}
 
 	/**
-	 * A toiletMap-ba generálja le a wc-k terem listáját, és a hozzá tartozó countot
+	 * A toiletMap-ba generĂˇlja le a wc-k terem listĂˇjĂˇt, Ă©s a hozzĂˇ tartozĂł countot
 	 * A toiletRoomsInOrder-be teszi sorrendben a wc-ket
 	 * @param count
 	 */
 	private void createToiletListForToiletMap() {
 		int count=1;
-		//Férfi wc-kre
+		//FĂ©rfi wc-kre
 		List<ManToilet> manToilets = wm.getManToiletListE();
 		
 		for (int i = 0; i < manToilets.size(); ++i) {
 			mantoiletmap.put("IE"+String.valueOf(i)+"10",count);		//A toiletmapba helyezi
-			toiletRoomsInOrder.add("IE"+String.valueOf(i)+"10");	//A rendezett listába szúrja
+			toiletRoomsInOrder.add("IE"+String.valueOf(i)+"10");	//A rendezett listĂˇba szĂşrja
 			count++;
 		}
 		
@@ -78,7 +78,7 @@ public class TestEnv extends jason.environment.Environment {
 		
 		manToilets = wm.getManToiletListB();
 		
-		//A földszinten eltér a számozás
+		//A fĂ¶ldszinten eltĂ©r a szĂˇmozĂˇs
 		mantoiletmap.put("IB009",count);
 		toiletRoomsInOrder.add("IB009");
 		count++;
@@ -89,7 +89,7 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
-		//Női wc-kre ugyanez
+		//NĹ‘i wc-kre ugyanez
 		List<WomanToilet> womanToilets = wm.getWomanToiletListE();
 		for (int i = 0; i < womanToilets.size(); ++i) {
 			womantoiletmap.put("IE"+String.valueOf(i)+"11",count);		
@@ -107,7 +107,7 @@ public class TestEnv extends jason.environment.Environment {
 		
 		womanToilets = wm.getWomanToiletListB();
 		
-		//Földszinten eltér a számozás
+		//FĂ¶ldszinten eltĂ©r a szĂˇmozĂˇs
 		womantoiletmap.put("IB010",count);
 		toiletRoomsInOrder.add("IB010");
 		count++;
@@ -118,13 +118,13 @@ public class TestEnv extends jason.environment.Environment {
 			count++;
 		}
 		
-		//Mozgássérültből csak 1 van
+		//MozgĂˇssĂ©rĂĽltbĹ‘l csak 1 van
 		disabledtoiletmap.put("IB011", 0);
 		toiletRoomsInOrder.add("IB011");
 	}
 
 	/**
-	 * Ágens parancshívás esetén ez kezeli
+	 * Ă�gens parancshĂ­vĂˇs esetĂ©n ez kezeli
 	 */
 	@Override
 	public boolean executeAction(String agName, Structure action) {
@@ -138,9 +138,9 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Férfivécére
-	 * A terem neve alaján generál számot, hogy melyik wc listából hányas wc referenciát 
-	 * keresse elő
+	 * FĂ©rfivĂ©cĂ©re
+	 * A terem neve alajĂˇn generĂˇl szĂˇmot, hogy melyik wc listĂˇbĂłl hĂˇnyas wc referenciĂˇt 
+	 * keresse elĹ‘
 	 * @param param
 	 * @return ManToilet
 	 */
@@ -159,9 +159,9 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Nőivécére
-	 * A terem neve alaján generál számot, hogy melyik wc listából hányas wc referenciát 
-	 * keresse elő
+	 * NĹ‘ivĂ©cĂ©re
+	 * A terem neve alajĂˇn generĂˇl szĂˇmot, hogy melyik wc listĂˇbĂłl hĂˇnyas wc referenciĂˇt 
+	 * keresse elĹ‘
 	 * @param param
 	 * @return ManToilet
 	 */
@@ -180,9 +180,9 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Mozgássérült wc-re
-	 * A terem neve alaján generál számot, hogy melyik wc listából hányas wc referenciát 
-	 * keresse elő
+	 * MozgĂˇssĂ©rĂĽlt wc-re
+	 * A terem neve alajĂˇn generĂˇl szĂˇmot, hogy melyik wc listĂˇbĂłl hĂˇnyas wc referenciĂˇt 
+	 * keresse elĹ‘
 	 * @param param
 	 * @return ManToilet
 	 */
@@ -195,8 +195,8 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Kezeli a férfi wc-kben történő foglalást, felszabadulást
-	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
+	 * Kezeli a fĂ©rfi wc-kben tĂ¶rtĂ©nĹ‘ foglalĂˇst, felszabadulĂˇst
+	 * Ha nincs ilyen wc, vagy takarĂ­tva van akkor nem vĂˇlt
 	 * @param param
 	 * @param increase Ha igaz, akkor felszabadul hely
 	 * @param type
@@ -211,14 +211,14 @@ public class TestEnv extends jason.environment.Environment {
 		
 		if(type.equals("Toilet")){	//Ha toilet
 			if(increase)
-				mt.incToilet();		//növel
+				mt.incToilet();		//nĂ¶vel
 			else
-				mt.decToilet();		//csökkent
-		}else{						//Ha piszóár
+				mt.decToilet();		//csĂ¶kkent
+		}else{						//Ha piszĂłĂˇr
 			if(increase)
-				mt.incUrine();		//növel
+				mt.incUrine();		//nĂ¶vel
 			else
-				mt.decUrine();		//csökkent
+				mt.decUrine();		//csĂ¶kkent
 		}
 		
 		view.setTextOfManToilet(String.valueOf(mt.getToilet()));
@@ -226,8 +226,8 @@ public class TestEnv extends jason.environment.Environment {
 	}
 
 	/**
-	 * Kezeli a női wc-kben történő foglalást, felszabadulást
-	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
+	 * Kezeli a nĹ‘i wc-kben tĂ¶rtĂ©nĹ‘ foglalĂˇst, felszabadulĂˇst
+	 * Ha nincs ilyen wc, vagy takarĂ­tva van akkor nem vĂˇlt
 	 * @param param
 	 * @param increase
 	 * @param type
@@ -241,16 +241,16 @@ public class TestEnv extends jason.environment.Environment {
 			return;
 		
 			if(increase)
-				mt.incToilet();		//növel
+				mt.incToilet();		//nĂ¶vel
 			else
-				mt.decToilet();		//csökkent
+				mt.decToilet();		//csĂ¶kkent
 		
 		view.setTextOfWomanToilet(String.valueOf(mt.getToilet()));
 	}
 	
 	/**
-	 * Kezeli a mozgáskorlátozott wc-(k)ben történő foglalást, felszabadulást
-	 * Ha nincs ilyen wc, vagy takarítva van akkor nem vált
+	 * Kezeli a mozgĂˇskorlĂˇtozott wc-(k)ben tĂ¶rtĂ©nĹ‘ foglalĂˇst, felszabadulĂˇst
+	 * Ha nincs ilyen wc, vagy takarĂ­tva van akkor nem vĂˇlt
 	 * @param param
 	 * @param increase
 	 * @param type
@@ -264,9 +264,9 @@ public class TestEnv extends jason.environment.Environment {
 			return;
 		
 			if(increase)
-				mt.incToilet();		//növel
+				mt.incToilet();		//nĂ¶vel
 			else
-				mt.decToilet();		//csökkent
+				mt.decToilet();		//csĂ¶kkent
 		
 		view.setTextOfDisabledToilet(String.valueOf(mt.getToilet()));
 	}
@@ -292,7 +292,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Visszatér a paraméterül kapott wc-ben lévő szabad wc-k számával
+	 * VisszatĂ©r a paramĂ©terĂĽl kapott wc-ben lĂ©vĹ‘ szabad wc-k szĂˇmĂˇval
 	 * Ha nincs ilyen, akkor -
 	 * @param param
 	 * @return
@@ -306,7 +306,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Visszatér a paraméterül kapott wc-ben lévő szabad piszóárok számával
+	 * VisszatĂ©r a paramĂ©terĂĽl kapott wc-ben lĂ©vĹ‘ szabad piszĂłĂˇrok szĂˇmĂˇval
 	 * Ha nincs ilyen, akkor -
 	 * @param param
 	 * @return
@@ -320,7 +320,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Visszatér a paraméterül kapott női wc-ben lévő szabad wc-k számával
+	 * VisszatĂ©r a paramĂ©terĂĽl kapott nĹ‘i wc-ben lĂ©vĹ‘ szabad wc-k szĂˇmĂˇval
 	 * Ha nincs ilyen akkor -
 	 * @param param
 	 * @return
@@ -334,7 +334,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * Visszatér a paraméterül kapott mozgássérült wc-ben lévő szabad wc-k számával
+	 * VisszatĂ©r a paramĂ©terĂĽl kapott mozgĂˇssĂ©rĂĽlt wc-ben lĂ©vĹ‘ szabad wc-k szĂˇmĂˇval
 	 * Ha nincs ilyen akkor -
 	 * @param param
 	 * @return
@@ -348,7 +348,7 @@ public class TestEnv extends jason.environment.Environment {
 	}
 	
 	/**
-	 * A control fülre való termek listáját adja vissza
+	 * A control fĂĽlre valĂł termek listĂˇjĂˇt adja vissza
 	 * @return
 	 */
 	public String[] getRooms() {
@@ -376,14 +376,14 @@ public class TestEnv extends jason.environment.Environment {
 	}
 
 	/**
-	 * Visszaadja a végeredmény teremszámot a kapott
-	 * emelet-szárny-típus paraméterek alapján
+	 * Visszaadja a vĂ©geredmĂ©ny teremszĂˇmot a kapott
+	 * emelet-szĂˇrny-tĂ­pus paramĂ©terek alapjĂˇn
 	 * @param res
 	 * @return
 	 */
 	public String getRoomNumber(String res) {
-		//Első paramáter: szárny, elemet
-		//Második: típus
+		//ElsĹ‘ paramĂˇter: szĂˇrny, elemet
+		//MĂˇsodik: tĂ­pus
 		String[] parameters=res.split(":");
 		
 		if(parameters[1].equals("womanToilet")){

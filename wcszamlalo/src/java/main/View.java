@@ -386,7 +386,7 @@ public class View extends GridWorldView {
 		gbc_label_7.gridy = 2;
 		ControlPanel.add(label_7, gbc_label_7);
 		
-		JButton CleaningStartButton = new JButton("Cleaning");
+		JButton CleaningStartButton = new JButton("Toogle Cleaning");
 		GridBagConstraints clean = new GridBagConstraints();
 		clean.insets = new Insets(0, 0, 5, 5);
 		clean.gridx = 3;
